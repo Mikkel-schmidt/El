@@ -8,7 +8,7 @@ from datetime import timedelta
 from tqdm import tqdm
 from stqdm import stqdm
 import ruptures as rpt
-import mpld3
+
 
 from streamlit_functions import select_tree, getMeterPoints, getMeterReadings
 from streamlit_tree_select import tree_select
