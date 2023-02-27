@@ -45,7 +45,7 @@ df['from'] = pd.to_datetime(df['from'], utc=True)
 df['meter'] = pd.to_numeric(df['meter'])
 df_orig = df
 #df.dtypes
-df_ignore = pd.read_csv('ignore_periods.txt', sep=',', header=0, parse_dates=[1,2])
+df_ignore = pd.read_csv('Code/ignore_periods.txt', sep=',', header=0, parse_dates=[1,2])
 df_ignore =pd.DataFrame(df_ignore)
 
 #st.dataframe(df_ignore)
