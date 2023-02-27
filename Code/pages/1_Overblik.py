@@ -20,6 +20,12 @@ import glob
 from os import listdir
 from os.path import isfile, join
 
+import locale
+#for lang in locale.windows_locale.values():
+#    st.write(lang)
+
+locale.setlocale(locale.LC_ALL, "da_DK")
+
 st.set_page_config(layout="wide", page_title="Overblik forbrug", page_icon="https://media.licdn.com/dms/image/C4E0BAQEwX9tzA6x8dw/company-logo_200_200/0/1642666749832?e=2147483647&v=beta&t=UiNzcE1RvJD3kHI218Al7omOzPLhHXXeE_svU4DIwEM")
 st.sidebar.image('https://via.ritzau.dk/data/images/00181/e7ddd001-aee3-4801-845f-38483b42ba8b.png')
 
@@ -33,7 +39,7 @@ Ud fra dette vil det give en beskrivelse af hvilke bygninger der forbruger ekstr
 
 IDs = st.session_state['IDs']
 
-@st.experimental_memo
+@st.cache_data
 def meters_overblik(IDs):
     df = getMeterReadings(IDs)
     return df
