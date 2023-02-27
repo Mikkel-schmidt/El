@@ -61,7 +61,7 @@ data, IDs = getMeterPoints(valgt[0])
 data['Adresse'] = data["streetName"] + " " + data['buildingNumber'] + ", " + data["postcode"] + ", " + data["cityName"]
 
 
-@st.experimental_singleton
+@st.cache_resource
 def get_map(data):
     service = geopy.Nominatim(user_agent = "myGeocoder")
     data["coordinates"] = data["Adresse"].apply(RateLimiter(service.geocode))#,min_delay_seconds=1))

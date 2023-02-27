@@ -113,6 +113,7 @@ wcwidth==0.2.5
 webencodings==0.5.1
 widgetsnbextension==3.5.1
 XlsxWriter==3.0.1
+mpld3==1.5
 
 folium==0.13.0
 streamlit_folium==0.6.15

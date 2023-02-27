@@ -39,7 +39,7 @@ if not st.session_state.valgt_meter.any():
 
 IDs = list(st.session_state.valgt_meter)
 
-@st.experimental_memo
+@st.cache_data
 def meters_indi(IDs):
     df = getMeterReadings(IDs)
     return df
@@ -132,7 +132,7 @@ dff['bkps'] = value_avg_day
 #st.write(dff)
  
 
-@st.experimental_singleton(ttl=20)
+@st.cache_ressource(ttl=20)
 def linesss(df, dff):
     b1 = (
         Line()

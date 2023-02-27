@@ -242,7 +242,7 @@ st.markdown('---')
 dff = df.groupby('Adresse').sum('amount').reset_index()
 col1, col2 = st.columns([1,2])
 
-@st.experimental_singleton
+@st.cache_resource
 def barr(df, grader):
     df = df.sort_values('amount')
     b1 = (
