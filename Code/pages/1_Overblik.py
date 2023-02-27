@@ -204,7 +204,7 @@ with col2:
     dfff['from'] = pd.to_datetime(dfff['from'])
     fig, ax = plt.subplots(figsize=(14,8)) 
     ax.plot(dfff['from'], dfff['amount'], linewidth=0.3)
-    st.write(dff['meter'].isin(df_ignore['meter']).any())
+    #st.write(dff['meter'].isin(df_ignore['meter']).any())
     if dff['meter'].isin(df_ignore['meter']).any():
         
         for i in range(len(df_ignore[df_ignore['meter'].isin(dff['meter'].unique())])):
