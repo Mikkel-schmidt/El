@@ -132,7 +132,7 @@ dff['bkps'] = value_avg_day
 #st.write(dff)
  
 
-@st.cache_ressource(ttl=20)
+@st.cache_ressource()
 def linesss(df, dff):
     b1 = (
         Line()

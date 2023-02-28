@@ -151,7 +151,7 @@ def besp():
         df_norm = dff[dff['bkps']==dff['bkps'].iloc[-1]].groupby('from').agg({'meter': 'mean', 'amount': 'sum', 'day-moment': 'first'}).reset_index()
 
         uge = ugeprofil(df_opti)
-        uge2 = ugeprofil(df_norm)
+        uge2 = ugeprofil(df_norm) 
         
 
         ugg = uge[['day', 'hour', 'amount', 'x-axis']].merge(uge2[['day', 'hour', 'amount']], how='outer', on=['day', 'hour'], suffixes=('_opti', '_now'))
