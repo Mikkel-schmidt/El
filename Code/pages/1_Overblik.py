@@ -162,7 +162,8 @@ def besp():
                                  'last': df_norm['amount'].mean(),
                                  'best': df_opti['amount'].mean(), 
                                  'mean': dff['amount'].mean(),
-                                 'bkps': my_bkps.tolist()} )
+                                 'bkps': my_bkps} )
+        st.write(df_besp)
         df_besp = df_besp.append(ttt)
         
     
