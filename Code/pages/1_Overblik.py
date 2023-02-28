@@ -161,9 +161,9 @@ def besp():
                                  'årligt forbrug': [ugg['amount_now'].sum()*52],
                                  'last': df_norm['amount'].mean(),
                                  'best': df_opti['amount'].mean(), 
-                                 'mean': dff['amount'].mean(),
-                                 'bkps': my_bkps} )
-        st.write(df_besp)
+                                 'mean': dff['amount'].mean(),})
+                                 #'bkps': my_bkps} )
+        #st.write(df_besp)
         df_besp = df_besp.append(ttt)
         
     
