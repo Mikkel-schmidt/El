@@ -121,7 +121,7 @@ def rupt(tid, df):
 
 #@st.experimental_memo
 def besp():
-    df_besp = pd.DataFrame(columns=['Adresse', 'besparelse', 'årligt forbrug', 'last', 'best', 'mean'])
+    df_besp = pd.DataFrame(columns=['Adresse', 'besparelse', 'årligt forbrug', 'last', 'best', 'mean', 'bkps'])
     
     for adr in stqdm(df['Adresse'].unique()):
         dff = df[df['Adresse']==adr]
@@ -161,7 +161,8 @@ def besp():
                                  'årligt forbrug': [ugg['amount_now'].sum()*52],
                                  'last': df_norm['amount'].mean(),
                                  'best': df_opti['amount'].mean(), 
-                                 'mean': dff['amount'].mean()} )
+                                 'mean': dff['amount'].mean(),
+                                 'bkps': my_bkps} )
         df_besp = df_besp.append(ttt)
         
     
@@ -205,7 +206,7 @@ with col2:
     ax.plot(dfff['from'], dfff['amount'], linewidth=0.3)
     #st.write(dff['meter'].isin(df_ignore['meter']).any())
     # if dff['meter'].isin(df_ignore['meter']).any():
-    
+
     #     for i in range(len(df_ignore[df_ignore['meter'].isin(dff['meter'].unique())])):
     #         ax.axvspan(df_ignore['from'].iloc[i], df_ignore['to'].iloc[i], facecolor='0.2', alpha=0.1)
     
