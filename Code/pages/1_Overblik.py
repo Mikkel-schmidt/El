@@ -4,8 +4,7 @@ import numpy as np
 import ruptures as rpt
 from stqdm import stqdm
 
-import folium
-from streamlit_folium import st_folium
+
 from streamlit_functions import select_tree, getMeterPoints, getMeterReadings
 from streamlit_tree_select import tree_select
 
@@ -51,8 +50,8 @@ df['from'] = pd.to_datetime(df['from'], utc=True)
 df['meter'] = pd.to_numeric(df['meter'])
 df_orig = df
 #df.dtypes
-df_ignore = pd.read_csv('Code/ignore_periods.txt', sep=',', header=0, parse_dates=[1,2])
-df_ignore =pd.DataFrame(df_ignore)
+#df_ignore = pd.read_csv('Code/ignore_periods.txt', sep=',', header=0, parse_dates=[1,2])
+#df_ignore =pd.DataFrame(df_ignore)
 
 #st.dataframe(df_ignore)
 #st.write(df_ignore['to'].iloc[0].date())
@@ -206,7 +205,7 @@ with col2:
     ax.plot(dfff['from'], dfff['amount'], linewidth=0.3)
     #st.write(dff['meter'].isin(df_ignore['meter']).any())
     # if dff['meter'].isin(df_ignore['meter']).any():
-        
+    
     #     for i in range(len(df_ignore[df_ignore['meter'].isin(dff['meter'].unique())])):
     #         ax.axvspan(df_ignore['from'].iloc[i], df_ignore['to'].iloc[i], facecolor='0.2', alpha=0.1)
     
