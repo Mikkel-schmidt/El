@@ -62,10 +62,10 @@ df_ignore =pd.DataFrame(df_ignore)
 #st.write(df_ignore['from'].dt.date)
 
 #st.write(df.head(1000))
-for i in range(len(df_ignore)):
-    df = df.loc[~((df.meter == df_ignore['meter'].iloc[i]) &
-                  (df['from'].dt.date >= df_ignore['from'].iloc[i].date()) &
-                  (df['from'].dt.date <= df_ignore['to'].iloc[i].date()))]
+# for i in range(len(df_ignore)):
+#     df = df.loc[~((df.meter == df_ignore['meter'].iloc[i]) &
+#                   (df['from'].dt.date >= df_ignore['from'].iloc[i].date()) &
+#                   (df['from'].dt.date <= df_ignore['to'].iloc[i].date()))]
 
 #st.write(df.head())
  
@@ -205,10 +205,10 @@ with col2:
     fig, ax = plt.subplots(figsize=(14,8)) 
     ax.plot(dfff['from'], dfff['amount'], linewidth=0.3)
     #st.write(dff['meter'].isin(df_ignore['meter']).any())
-    if dff['meter'].isin(df_ignore['meter']).any():
+    # if dff['meter'].isin(df_ignore['meter']).any():
         
-        for i in range(len(df_ignore[df_ignore['meter'].isin(dff['meter'].unique())])):
-            ax.axvspan(df_ignore['from'].iloc[i], df_ignore['to'].iloc[i], facecolor='0.2', alpha=0.1)
+    #     for i in range(len(df_ignore[df_ignore['meter'].isin(dff['meter'].unique())])):
+    #         ax.axvspan(df_ignore['from'].iloc[i], df_ignore['to'].iloc[i], facecolor='0.2', alpha=0.1)
     
     ax.plot(dff['from'], dff['bkps'])
     ax.plot(dff['from'][dff['bkps']==dff['bkps'].min()], dff['bkps'][dff['bkps']==dff['bkps'].min()], linewidth=6)
