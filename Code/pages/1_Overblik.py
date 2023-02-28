@@ -216,15 +216,15 @@ with col2:
     st.pyplot(fig)
     #st.write(dff.mean())
     #st.write(dff)
-    def exclude_dates(valg1, valg2):
-        df_ex = pd.DataFrame(data={'meter': dfff.meter.unique(), 'from': valg1, 'to': valg2})
-        df_ex.to_csv('ignore_periods.txt', mode='a', index=False, header=False)
+    # def exclude_dates(valg1, valg2):
+    #     df_ex = pd.DataFrame(data={'meter': dfff.meter.unique(), 'from': valg1, 'to': valg2})
+    #     df_ex.to_csv('ignore_periods.txt', mode='a', index=False, header=False)
 
 
-    valg1, valg2 = st.slider('Vælg datoer der skal ekskluderes', dfff['from'].dt.date.min(), dfff['from'].dt.date.max(), (dfff['from'].dt.date.min(), (dfff['from'].dt.date.min() + pd.Timedelta(1, unit='d'))))
+    #valg1, valg2 = st.slider('Vælg datoer der skal ekskluderes', dfff['from'].dt.date.min(), dfff['from'].dt.date.max(), (dfff['from'].dt.date.min(), (dfff['from'].dt.date.min() + pd.Timedelta(1, unit='d'))))
     #st.button('Ekskluder datoer fra analysen', on_click=exclude_dates(valg1, valg2))
 
-    st.button('Ekskluder datoer fra analysen', on_click=exclude_dates(valg1, valg2))
+    #st.button('Ekskluder datoer fra analysen', on_click=exclude_dates(valg1, valg2))
 
 
 
