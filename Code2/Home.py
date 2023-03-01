@@ -57,6 +57,7 @@ def meters_overblik():
     return df
 
 df = meters_overblik()
+st.write(df.head())
 df['meter'] = pd.to_numeric(df['meter'])
 df = df.groupby('Adresse').mean().reset_index()
 st.write(df[['Adresse', 'meter']].sort_values('Adresse'))
