@@ -61,10 +61,10 @@ df = meters_overblik()
 
 df['meter'] = pd.to_numeric(df['meter'])
 #df = df.groupby('Adresse').mean().reset_index()
-st.write(df.groupby(['Adresse', 'meter']).sum().reset_index())
+st.write(df.groupby('meter').agg({'Adresse': 'first', 'amount': 'sum'}).reset_index())
 
 if 'df_select' not in st.session_state:
-    st.session_state['df_select'] = df.groupby(['Adresse', 'meter']).sum().reset_index()[['Adresse', 'meter']].drop_duplicates()
+    st.session_state['df_select'] = df.groupby(['Adresse', 'meter']).sum().reset_index()[['Adresse', 'meter']].drop_duplicates('meter')
 
 nodes = select_tree()
 
