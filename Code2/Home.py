@@ -54,10 +54,12 @@ else:
 @st.cache_data
 def meters_overblik():
     df = pd.read_csv('https://raw.githubusercontent.com/Mikkel-schmidt/Elforbrug/main/Data/besp/' + st.session_state.kunde[0] + '.csv', sep=',')
-    return df
+    dff = pd.read_feather('crashes.feather')
+    return df, dff
 
-df = meters_overblik()
+df, dff = meters_overblik()
 st.write(df.head())
+st.write(dff.head())
 df['meter'] = pd.to_numeric(df['meter'])
 df = df.groupby('Adresse').mean().reset_index()
 st.write(df[['Adresse', 'meter']].sort_values('Adresse'))
