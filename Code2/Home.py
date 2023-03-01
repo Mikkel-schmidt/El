@@ -56,12 +56,9 @@ def meters_overblik():
     df = pd.read_csv('https://github.com/Mikkel-schmidt/Elforbrug/raw/main/Data/besp/' + st.session_state.kunde[0] + '.csv', sep=',')
     #dff = pd.read_feather('https://raw.githubusercontent.com/Mikkel-schmidt/Elforbrug/main/Data/besp/' + st.session_state.kunde[0] + '.csv')
     return df
-#https://github.com/Mikkel-schmidt/Elforbrug/blob/main/Data/timeforbrug/FitnessWorld.csv?raw=true
-#https://github.com/Mikkel-schmidt/Elforbrug/raw/main/Data/timeforbrug/FitnessWorld.csv
 
 df = meters_overblik()
-st.write(df.head())
-st.write(dff.head())
+
 df['meter'] = pd.to_numeric(df['meter'])
 df = df.groupby('Adresse').mean().reset_index()
 st.write(df[['Adresse', 'meter']].sort_values('Adresse'))

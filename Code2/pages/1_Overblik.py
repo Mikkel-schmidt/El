@@ -41,8 +41,8 @@ Ud fra dette vil det give en beskrivelse af hvilke bygninger der forbruger ekstr
 
 @st.cache_data
 def meters_overblik():
-    df = pd.read_csv('https://raw.githubusercontent.com/Mikkel-schmidt/Elforbrug/main/Data/timeforbrug/' + st.session_state.kunde[0] + '.csv')
-    df_besp = pd.read_csv('https://raw.githubusercontent.com/Mikkel-schmidt/Elforbrug/main/Data/besp/' + st.session_state.kunde[0] + '.csv')
+    df = pd.read_csv('https://github.com/Mikkel-schmidt/Elforbrug/raw/main/Data/timeforbrug/' + st.session_state.kunde[0] + '.csv')
+    df_besp = pd.read_csv('https://github.com/Mikkel-schmidt/Elforbrug/raw/main/Data/besp/' + st.session_state.kunde[0] + '.csv')
     return df, df_besp
 
 df, df_besp = meters_overblik()
