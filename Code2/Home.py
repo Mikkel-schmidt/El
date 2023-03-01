@@ -60,7 +60,7 @@ def meters_overblik():
 df = meters_overblik()
 
 df['meter'] = pd.to_numeric(df['meter'])
-df = df.groupby('Adresse').mean().reset_index()
+#df = df.groupby('Adresse').mean().reset_index()
 st.write(df[['Adresse', 'meter']].sort_values('Adresse'))
 
 if 'df_select' not in st.session_state:
