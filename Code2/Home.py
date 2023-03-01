@@ -64,7 +64,7 @@ df['meter'] = pd.to_numeric(df['meter'])
 st.write(df.groupby(['Adresse', 'meter']).sum().reset_index()[['Adresse', 'meter']])
 
 if 'df_select' not in st.session_state:
-    st.session_state['df_select'] = df[['Adresse', 'meter']].sort_values('Adresse')
+    st.session_state['df_select'] = df.groupby(['Adresse', 'meter']).sum().reset_index()[['Adresse', 'meter']]
 
 nodes = select_tree()
 
