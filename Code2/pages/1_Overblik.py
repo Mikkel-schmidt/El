@@ -157,7 +157,7 @@ col1.markdown("""I tabellen nedenunder kan du se informationer på de enkelte by
 """)
 
 @st.cache_data
-def standby_df(df)
+def standby_df(df):
     df_g = df.groupby(['Adresse', 'day-moment']).agg({'amount': 'sum', 'from': 'count'}).reset_index()
     df_g['time gns'] = df_g.apply(lambda row: row['amount']/row['from'], axis=1)
     df_h = df_g.pivot( index='Adresse', columns=['day-moment'], values='time gns').reset_index()
