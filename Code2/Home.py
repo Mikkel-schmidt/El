@@ -48,7 +48,7 @@ if not st.session_state.kunde:
   st.warning('Vær sød at vælge en kunde i højre hjørne') 
   st.stop()
 else:
-   st.success('Kunde valgt!')
+   st.success(st.session_state.kunde + ' valgt!')
 
 
 @st.cache_data
