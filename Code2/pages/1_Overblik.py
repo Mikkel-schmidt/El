@@ -144,37 +144,6 @@ def get_day_moment(hour) -> str:
 
 df['day-moment'] = df.apply(lambda row: get_day_moment(hour = row['from'].hour), axis=1)
 
-col1.subheader('Standbyanalyse')
-col1.markdown("""Ved at udnytte en standbyanalyse kan man få et indblik i unødvendigt forbrug der ikke er timer på.""")
-col1.markdown("""Hvis standbyforbruget er ligeså stort som forbruget indenfor åbningstid, så er det sandsynligt at f.eks. lys eller ventilation kører om natten.
-Potentielt kan det også være andre ting, såsom en utæt kompressor eller andet - det vil dog først vise sig ven en besigtigelse.""")
-col1.markdown('Den øverste figur til højre viser andelen af forbruget i og udenfor åbningstid. Åbningstiden kan justeres til højre. ')
-col1.markdown('Den nederste figur til højre viser det gennemsnitlige forbrug i og udenfor åbningstiderne.')
-col1.markdown("""I tabellen nedenunder kan du se informationer på de enkelte bygnigner om:
-- Totalt dagsforbrug, standbyforbrug og det samlede forbrug
-- Det gennemsnitlige forbrug i timen i og udenfor åbningstid
-- Standbyforbrugets størrelse sammenlignet med dagsforbruget (vægtet) og det totale forbrug (total)
-""")
-
-@st.cache_data
-def standby_df(df):
-    df_g = df.groupby(['Adresse', 'day-moment']).agg({'amount': 'sum', 'from': 'count'}).reset_index()
-    df_g['time gns'] = df_g.apply(lambda row: row['amount']/row['from'], axis=1)
-    df_h = df_g.pivot( index='Adresse', columns=['day-moment'], values='time gns').reset_index()
-    df_h = df_h.rename(columns={'Dagsforbrug': 'Time gns. dag', 'Standby forbrug': 'Time gns. standby'})
-
-    df_g = df_g.pivot( index='Adresse', columns=['day-moment'], values='amount').reset_index()
-
-    df_g['Totalt forbrug'] = df_g['Standby forbrug']+df_g['Dagsforbrug']
-    df_g = df_g.merge(df_h, on='Adresse')
-
-    df_g['Standby Vægtet [%]'] = df_g['Standby forbrug']/df_g['Dagsforbrug']*100
-    df_g['Standby Total [%]'] = df_g['Standby forbrug']/(df_g['Standby forbrug']+df_g['Dagsforbrug'])*100
-    return df_g
-
-df_g = standby_df(df)
-col1.write(df_g.sort_values(by='Standby Total [%]', ascending=False).style.background_gradient(cmap='Blues').set_precision(1))
-
 @st.cache_resource
 def piee(df):
     hej = df.groupby('day-moment').sum()['amount'].reset_index()
@@ -248,6 +217,37 @@ def bars(df, grader):
         .set_series_opts()
     )
     return b1
+
+col1.subheader('Standbyanalyse')
+col1.markdown("""Ved at udnytte en standbyanalyse kan man få et indblik i unødvendigt forbrug der ikke er timer på.""")
+col1.markdown("""Hvis standbyforbruget er ligeså stort som forbruget indenfor åbningstid, så er det sandsynligt at f.eks. lys eller ventilation kører om natten.
+Potentielt kan det også være andre ting, såsom en utæt kompressor eller andet - det vil dog først vise sig ven en besigtigelse.""")
+col1.markdown('Den øverste figur til højre viser andelen af forbruget i og udenfor åbningstid. Åbningstiden kan justeres til højre. ')
+col1.markdown('Den nederste figur til højre viser det gennemsnitlige forbrug i og udenfor åbningstiderne.')
+col1.markdown("""I tabellen nedenunder kan du se informationer på de enkelte bygnigner om:
+- Totalt dagsforbrug, standbyforbrug og det samlede forbrug
+- Det gennemsnitlige forbrug i timen i og udenfor åbningstid
+- Standbyforbrugets størrelse sammenlignet med dagsforbruget (vægtet) og det totale forbrug (total)
+""")
+
+@st.cache_data
+def standby_df(df):
+    df_g = df.groupby(['Adresse', 'day-moment']).agg({'amount': 'sum', 'from': 'count'}).reset_index()
+    df_g['time gns'] = df_g.apply(lambda row: row['amount']/row['from'], axis=1)
+    df_h = df_g.pivot( index='Adresse', columns=['day-moment'], values='time gns').reset_index()
+    df_h = df_h.rename(columns={'Dagsforbrug': 'Time gns. dag', 'Standby forbrug': 'Time gns. standby'})
+
+    df_g = df_g.pivot( index='Adresse', columns=['day-moment'], values='amount').reset_index()
+
+    df_g['Totalt forbrug'] = df_g['Standby forbrug']+df_g['Dagsforbrug']
+    df_g = df_g.merge(df_h, on='Adresse')
+
+    df_g['Standby Vægtet [%]'] = df_g['Standby forbrug']/df_g['Dagsforbrug']*100
+    df_g['Standby Total [%]'] = df_g['Standby forbrug']/(df_g['Standby forbrug']+df_g['Dagsforbrug'])*100
+    return df_g
+
+df_g = standby_df(df)
+col1.write(df_g.sort_values(by='Standby Total [%]', ascending=False).style.background_gradient(cmap='Blues').set_precision(1))
 
 
 with col2:
