@@ -77,7 +77,7 @@ def linesss(df):
         .add_yaxis('Activity', list(df['bkps']),  label_opts=opts.LabelOpts(is_show=False,formatter="{b}: {c}"),
         linestyle_opts=opts.LineStyleOpts( width=3),symbol='emptyCircle', symbol_size=10)
         .add_yaxis('Best', list(df['bkps'].where(df['bkps']==df['bkps'].min())),  label_opts=opts.LabelOpts(is_show=False,formatter="{b}: {c}"),
-        linestyle_opts=opts.LineStyleOpts( width=5),symbol='emptyCircle', symbol_size=10)
+        linestyle_opts=opts.LineStyleOpts( width=8),symbol='emptyCircle', symbol_size=10)
         .set_global_opts(
             legend_opts=opts.LegendOpts(orient='horizontal', pos_left="center", is_show=True),
             title_opts=opts.TitleOpts(),
