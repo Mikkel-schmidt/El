@@ -41,7 +41,7 @@ IDs = list(st.session_state.valgt_meter)
 
 @st.cache_data
 def meters_indi(): 
-    df = pd.read_csv('../Data/timeforbrug/' + st.session_state.kunde[0] + '.csv')
+    df = pd.read_csv('https://raw.githubusercontent.com/Mikkel-schmidt/Elforbrug/main/Data/timeforbrug/' + st.session_state.kunde[0] + '.csv')
     #df = df[df['meter'].isin(list(st.session_state.valgt_meter))]
     return df
 
