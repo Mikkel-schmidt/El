@@ -155,19 +155,24 @@ col1.markdown("""I tabellen nedenunder kan du se informationer på de enkelte by
 - Det gennemsnitlige forbrug i timen i og udenfor åbningstid
 - Standbyforbrugets størrelse sammenlignet med dagsforbruget (vægtet) og det totale forbrug (total)
 """)
-df_g = df.groupby(['Adresse', 'day-moment']).agg({'amount': 'sum', 'from': 'count'}).reset_index()
-df_g['time gns'] = df_g.apply(lambda row: row['amount']/row['from'], axis=1)
-df_h = df_g.pivot( index='Adresse', columns=['day-moment'], values='time gns').reset_index()
-df_h = df_h.rename(columns={'Dagsforbrug': 'Time gns. dag', 'Standby forbrug': 'Time gns. standby'})
 
-df_g = df_g.pivot( index='Adresse', columns=['day-moment'], values='amount').reset_index()
+@st.cache_data
+def standby_df(df)
+    df_g = df.groupby(['Adresse', 'day-moment']).agg({'amount': 'sum', 'from': 'count'}).reset_index()
+    df_g['time gns'] = df_g.apply(lambda row: row['amount']/row['from'], axis=1)
+    df_h = df_g.pivot( index='Adresse', columns=['day-moment'], values='time gns').reset_index()
+    df_h = df_h.rename(columns={'Dagsforbrug': 'Time gns. dag', 'Standby forbrug': 'Time gns. standby'})
 
-df_g['Totalt forbrug'] = df_g['Standby forbrug']+df_g['Dagsforbrug']
-df_g = df_g.merge(df_h, on='Adresse')
+    df_g = df_g.pivot( index='Adresse', columns=['day-moment'], values='amount').reset_index()
 
-df_g['Standby Vægtet [%]'] = df_g['Standby forbrug']/df_g['Dagsforbrug']*100
-df_g['Standby Total [%]'] = df_g['Standby forbrug']/(df_g['Standby forbrug']+df_g['Dagsforbrug'])*100
+    df_g['Totalt forbrug'] = df_g['Standby forbrug']+df_g['Dagsforbrug']
+    df_g = df_g.merge(df_h, on='Adresse')
 
+    df_g['Standby Vægtet [%]'] = df_g['Standby forbrug']/df_g['Dagsforbrug']*100
+    df_g['Standby Total [%]'] = df_g['Standby forbrug']/(df_g['Standby forbrug']+df_g['Dagsforbrug'])*100
+    return df_g
+
+df_g = standby_df(df)
 col1.write(df_g.sort_values(by='Standby Total [%]', ascending=False).style.background_gradient(cmap='Blues').set_precision(1))
 
 @st.cache_resource
