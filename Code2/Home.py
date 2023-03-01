@@ -53,7 +53,7 @@ else:
 
 @st.cache_data
 def meters_overblik():
-    df = pd.read_csv('Elforbrug/Data/besp/' + st.session_state.kunde[0] + '.csv')
+    df = pd.read_csv('Data/besp/' + st.session_state.kunde[0] + '.csv')
     return df
 
 df = meters_overblik()
