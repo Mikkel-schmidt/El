@@ -53,7 +53,7 @@ else:
 
 @st.cache_data
 def meters_overblik():
-    df = pd.read_csv('https://github.com/Mikkel-schmidt/Elforbrug/raw/main/Data/timeforbrug/' + st.session_state.kunde[0] + '.csv', usecols=['Adresse', 'meter'], sep=',')
+    df = pd.read_csv('https://github.com/Mikkel-schmidt/Elforbrug/raw/main/Data/timeforbrug/' + st.session_state.kunde[0] + '.csv', usecols=['Adresse', 'meter', 'amount'], sep=',')
     #dff = pd.read_feather('https://raw.githubusercontent.com/Mikkel-schmidt/Elforbrug/main/Data/besp/' + st.session_state.kunde[0] + '.csv')
     return df
 
@@ -61,7 +61,7 @@ df = meters_overblik()
 
 df['meter'] = pd.to_numeric(df['meter'])
 #df = df.groupby('Adresse').mean().reset_index()
-st.write(df.head())
+st.write(df.groupby('Adresse').sum())
 
 if 'df_select' not in st.session_state:
     st.session_state['df_select'] = df[['Adresse', 'meter']].sort_values('Adresse')
