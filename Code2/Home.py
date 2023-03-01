@@ -53,9 +53,11 @@ else:
 
 @st.cache_data
 def meters_overblik():
-    df = pd.read_csv('https://raw.githubusercontent.com/Mikkel-schmidt/Elforbrug/main/Data/besp/' + st.session_state.kunde[0] + '.csv', sep=',')
+    df = pd.read_csv('https://github.com/Mikkel-schmidt/Elforbrug/raw/main/Data/besp/' + st.session_state.kunde[0] + '.csv', sep=',')
     #dff = pd.read_feather('https://raw.githubusercontent.com/Mikkel-schmidt/Elforbrug/main/Data/besp/' + st.session_state.kunde[0] + '.csv')
     return df
+#https://github.com/Mikkel-schmidt/Elforbrug/blob/main/Data/timeforbrug/FitnessWorld.csv?raw=true
+#https://github.com/Mikkel-schmidt/Elforbrug/raw/main/Data/timeforbrug/FitnessWorld.csv
 
 df = meters_overblik()
 st.write(df.head())
