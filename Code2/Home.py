@@ -54,7 +54,7 @@ else:
 @st.cache_data
 def meters_overblik():
     df = pd.read_csv('https://raw.githubusercontent.com/Mikkel-schmidt/Elforbrug/main/Data/besp/' + st.session_state.kunde[0] + '.csv', sep=',')
-    dff = pd.read_feather('crashes.feather')
+    dff = pd.read_feather('https://raw.githubusercontent.com/Mikkel-schmidt/Elforbrug/main/Data/besp/' + st.session_state.kunde[0] + '.csv')
     return df, dff
 
 df, dff = meters_overblik()
