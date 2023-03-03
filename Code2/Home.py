@@ -36,7 +36,7 @@ col1.title('Forbrugsdata på erhvervsbygninger')
 col1.markdown('Loading data - please wait till done.')
 c = col1.container()
 
-kunder = ['FitnessWorld', 'Syntese', 'Danskebank', 'Siemens Gamesa', 'NykreditMaegler', 'Bahne', 'Horsens Kommune', 'G4S', 'VinkPlast', 'MilestoneSystems', 'Premier Is']
+kunder = ['FitnessWorld', 'Syntese', 'DanskeBank', 'Siemens Gamesa', 'NykreditMaegler', 'Bahne', 'Horsens Kommune', 'G4S', 'VinkPlast', 'MilestoneSystems', 'Premier Is']
 if 'kunde' not in st.session_state:
     valgt = col2.multiselect('Vælg kunde (må kun være en kunde)', kunder, max_selections=1)
     st.session_state['kunde'] = valgt
