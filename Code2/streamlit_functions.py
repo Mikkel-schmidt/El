@@ -70,7 +70,7 @@ def select_tree():
             return_select = tree_select(nodes)
         else:
             return_select = tree_select(nodes, checked=list(st.session_state.valgt_meter))
-            st.write(return_select)
+            #st.write(return_select)
     st.session_state.valgt_meter = pd.json_normalize(return_select)['checked'][0]
     return res
 
