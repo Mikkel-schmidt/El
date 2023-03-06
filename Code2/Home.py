@@ -48,10 +48,10 @@ if check_password():
         st.session_state['kunde'] = valgt
 
     if not st.session_state.kunde:
-    st.warning('Vær sød at vælge en kunde i højre hjørne') 
-    st.stop()
+        st.warning('Vær sød at vælge en kunde i højre hjørne') 
+        st.stop()
     else:
-    st.success(str(st.session_state.kunde[0]) + ' valgt!')
+        st.success(str(st.session_state.kunde[0]) + ' valgt!')
 
 
     @st.cache_data
