@@ -30,10 +30,10 @@
     <img src="https://via.ritzau.dk/data/images/00181/e7ddd001-aee3-4801-845f-38483b42ba8b.png" alt="Logo" width="200" height="80">
   </a>
 
-<h3 align="center">project_title</h3>
+<h3 align="center">Elforbrug</h3>
 
   <p align="center">
-    project_description
+    Værktøj til at behandle elforbrug hos kunder
     <br />
     <a href="https://github.com/github_username/repo_name"><strong>Explore the docs »</strong></a>
     <br />
