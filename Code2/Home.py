@@ -10,7 +10,7 @@ import geopy
 from geopy.extra.rate_limiter import RateLimiter
 import folium
 from streamlit_folium import st_folium
-from streamlit_functions import select_tree, getMeterPoints, getMeterReadings
+from streamlit_functions import select_tree, getMeterPoints, getMeterReadings, check_password
 from streamlit_tree_select import tree_select
 from streamlit_extras.app_logo import add_logo
 
@@ -33,40 +33,43 @@ st.sidebar.image('https://via.ritzau.dk/data/images/00181/e7ddd001-aee3-4801-845
 
 col1, col2 = st.columns([2,1])
 col1.title('Forbrugsdata på erhvervsbygninger')
-col1.markdown('Loading data - please wait till done.')
-c = col1.container()
 
-kunder = ['FitnessWorld', 'Syntese', 'DanskeBank', 'Siemens Gamesa', 'NykreditMaegler', 'Bahne', 'Horsens Kommune', 'G4S', 'VinkPlast', 'MilestoneSystems', 'Premier Is']
-if 'kunde' not in st.session_state:
-    valgt = col2.multiselect('Vælg kunde (må kun være en kunde)', kunder, max_selections=1)
-    st.session_state['kunde'] = valgt
-else:
-    valgt = col2.multiselect('Vælg kunde (må kun være en kunde)', kunder, default=st.session_state.kunde, on_change=run_again(), max_selections=1)
-    st.session_state['kunde'] = valgt
+if check_password():
+    
 
-if not st.session_state.kunde:
-  st.warning('Vær sød at vælge en kunde i højre hjørne') 
-  st.stop()
-else:
-   st.success(str(st.session_state.kunde[0]) + ' valgt!')
+    c = col1.container()
+
+    kunder = ['FitnessWorld', 'Syntese', 'DanskeBank', 'Siemens Gamesa', 'NykreditMaegler', 'Bahne', 'Horsens Kommune', 'G4S', 'VinkPlast', 'MilestoneSystems', 'Premier Is']
+    if 'kunde' not in st.session_state:
+        valgt = col2.multiselect('Vælg kunde (må kun være en kunde)', kunder, max_selections=1)
+        st.session_state['kunde'] = valgt
+    else:
+        valgt = col2.multiselect('Vælg kunde (må kun være en kunde)', kunder, default=st.session_state.kunde, on_change=run_again(), max_selections=1)
+        st.session_state['kunde'] = valgt
+
+    if not st.session_state.kunde:
+    st.warning('Vær sød at vælge en kunde i højre hjørne') 
+    st.stop()
+    else:
+    st.success(str(st.session_state.kunde[0]) + ' valgt!')
 
 
-@st.cache_data
-def meters_overblik():
-    df = pd.read_csv('https://github.com/Mikkel-schmidt/Elforbrug/raw/main/Data/timeforbrug/' + st.session_state.kunde[0] + '.csv', usecols=['Adresse', 'meter', 'amount'], sep=',')
-    #dff = pd.read_feather('https://raw.githubusercontent.com/Mikkel-schmidt/Elforbrug/main/Data/besp/' + st.session_state.kunde[0] + '.csv')
-    return df
+    @st.cache_data
+    def meters_overblik():
+        df = pd.read_csv('https://github.com/Mikkel-schmidt/Elforbrug/raw/main/Data/timeforbrug/' + st.session_state.kunde[0] + '.csv', usecols=['Adresse', 'meter', 'amount'], sep=',')
+        #dff = pd.read_feather('https://raw.githubusercontent.com/Mikkel-schmidt/Elforbrug/main/Data/besp/' + st.session_state.kunde[0] + '.csv')
+        return df
 
-df = meters_overblik()
+    df = meters_overblik()
 
-df['meter'] = pd.to_numeric(df['meter'])
-#df = df.groupby('Adresse').mean().reset_index()
-st.write(df.groupby('meter').agg({'Adresse': 'first', 'amount': 'sum'}).reset_index())
+    df['meter'] = pd.to_numeric(df['meter'])
+    #df = df.groupby('Adresse').mean().reset_index()
+    st.write(df.groupby('meter').agg({'Adresse': 'first', 'amount': 'sum'}).reset_index())
 
-if 'df_select' not in st.session_state:
-    st.session_state['df_select'] = df.groupby(['Adresse', 'meter']).sum().reset_index()[['Adresse', 'meter']].drop_duplicates('meter')
+    if 'df_select' not in st.session_state:
+        st.session_state['df_select'] = df.groupby(['Adresse', 'meter']).sum().reset_index()[['Adresse', 'meter']].drop_duplicates('meter')
 
-nodes = select_tree()
+    nodes = select_tree()
 
 
 
