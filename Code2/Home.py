@@ -35,7 +35,7 @@ col1, col2 = st.columns([2,1])
 col1.title('Forbrugsdata på erhvervsbygninger')
 
 if check_password():
-    
+    col1.success('Login success')
 
     c = col1.container()
 
@@ -56,7 +56,7 @@ if check_password():
 
     @st.cache_data
     def meters_overblik():
-        df = pd.read_csv('https://github.com/Mikkel-schmidt/Elforbrug/raw/main/Data/timeforbrug/' + st.session_state.kunde[0] + '.csv', usecols=['Adresse', 'meter', 'amount'], sep=',')
+        df = pd.read_csv('https://media.githubusercontent.com/media/Mikkel-schmidt/Elforbrug/main/Data/timeforbrug/' + quote(st.session_state.kunde[0]) + '.csv?token=AVQFGF2XW3UN536OSZEU5ZTEAW7W6', usecols=['Adresse', 'meter', 'amount'], sep=',')
         #dff = pd.read_feather('https://raw.githubusercontent.com/Mikkel-schmidt/Elforbrug/main/Data/besp/' + st.session_state.kunde[0] + '.csv')
         return df
 
