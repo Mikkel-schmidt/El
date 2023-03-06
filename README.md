@@ -27,7 +27,7 @@
 <br />
 <div align="center">
   <a href="https://nrgi.dk/erhverv/">
-    <img src="https://via.ritzau.dk/data/images/00181/e7ddd001-aee3-4801-845f-38483b42ba8b.png" alt="Logo" width="80" height="80">
+    <img src="https://via.ritzau.dk/data/images/00181/e7ddd001-aee3-4801-845f-38483b42ba8b.png" alt="Logo" width="160" height="80">
   </a>
 
 <h3 align="center">project_title</h3>
