@@ -51,7 +51,7 @@ if check_password():
         st.warning('Vær sød at vælge en kunde i højre hjørne') 
         st.stop()
     else:
-        col2.success(str(st.session_state.kunde[0]) + ' valgt!')
+        col2.success(str(st.session_state.kunde[0]) + ' valgt!') 
 
 
     @st.cache_data
