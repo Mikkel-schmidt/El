@@ -93,7 +93,7 @@ if check_password():
         )
         return b1
 
-    with col2:
+    with col1:
         figur = barr(df.groupby(df['from'].dt.month).agg({'Adresse': 'first', 'amount': 'sum'}).reset_index(), 90)
         st_pyecharts(figur, height='500px')
 
