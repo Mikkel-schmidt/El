@@ -56,7 +56,7 @@ if check_password():
 
     @st.cache_data
     def meters_overblik():
-        df = pd.read_csv('https://media.githubusercontent.com/media/Mikkel-schmidt/Elforbrug/main/Data/timeforbrug/' + quote(st.session_state.kunde[0]) + '.csv?token=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', usecols=['Adresse', 'meter', 'amount'], sep=',')
+        df = pd.read_csv('https://media.githubusercontent.com/media/Mikkel-schmidt/Elforbrug/main/Data/timeforbrug/' + quote(st.session_state.kunde[0]) + '.csv?token=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', usecols=['Adresse', 'meter', 'amount', 'from'], sep=',')
         #dff = pd.read_feather('https://raw.githubusercontent.com/Mikkel-schmidt/Elforbrug/main/Data/besp/' + st.session_state.kunde[0] + '.csv')
         return df
 
@@ -64,14 +64,37 @@ if check_password():
 
     df['meter'] = pd.to_numeric(df['meter'])
     #df = df.groupby('Adresse').mean().reset_index()
-    st.write(df.groupby('meter').agg({'Adresse': 'first', 'amount': 'sum'}).reset_index())
+    
 
     if 'df_select' not in st.session_state:
         st.session_state['df_select'] = df.groupby(['Adresse', 'meter']).sum().reset_index()[['Adresse', 'meter']].drop_duplicates('meter')
 
     nodes = select_tree()
 
+    @st.cache_resource
+    def barr(df, grader):
+        df = df.sort_values('årligt forbrug')
+        b1 = (
+            Bar()
+            .add_xaxis(list(df['Adresse']))
+            .add_yaxis('Samlet forbrug', list(df['årligt forbrug']), label_opts=opts.LabelOpts(is_show=False, formatter="{b}: {c}"),)
+            .reversal_axis()
+            .set_global_opts(
+                datazoom_opts=[opts.DataZoomOpts(type_="inside", orient="vertical"), opts.DataZoomOpts(type_="slider", orient="vertical")], 
+                #legend_opts=opts.LegendOpts(orient='vertical', pos_left="left", is_show=True),
+                xaxis_opts=opts.AxisOpts(axislabel_opts=opts.LabelOpts(rotate=grader), name='Intensitet [kWh/m2]'),
+                title_opts=opts.TitleOpts(title='Samlet forbrug', pos_left="center"),
+                toolbox_opts=opts.ToolboxOpts(orient='vertical', is_show=False),
+            )
+            .set_series_opts()
+        )
+        return b1
 
+    with col2:
+        figur = barr(df.groupby(df['from'].dt.month), 90)
+        st_pyecharts(figur, height='500px')
+
+    st.write(df.groupby('meter').agg({'Adresse': 'first', 'amount': 'sum'}).reset_index())
 
 
 
