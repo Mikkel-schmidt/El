@@ -76,7 +76,7 @@ if check_password():
 
     @st.cache_resource
     def barr(df, grader):
-        df = df.sort_values('årligt forbrug')
+        #df = df.sort_values('årligt forbrug')
         b1 = (
             Bar()
             .add_xaxis(list(df['Adresse']))
