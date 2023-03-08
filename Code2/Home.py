@@ -110,8 +110,8 @@ if check_password():
     st.write('Data')
     st.write(data)
     st.write(data.dtypes)
-    data['tid'] = data.year.str.cat(data.month)
-    #data['tid'] = df['month'].astype(str) + df['year'].astype(str)
+    #data['tid'] = data.year.str.cat(data.month)
+    data['tid'] = data['month'] + data['year'].astype(str)
     st.write(data)
 
     st.write(df.groupby('meter').agg({'Adresse': 'first', 'amount': 'sum'}).reset_index())
