@@ -62,7 +62,7 @@ if check_password():
 
     @st.cache_data
     def meters_overblik():
-        df = pd.read_csv('https://media.githubusercontent.com/media/Mikkel-schmidt/Elforbrug/main/Data/timeforbrug/' + quote(st.session_state.kunde[0]) + '.csv?token=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', usecols=['Adresse', 'meter', 'amount', 'from'], sep=',')
+        df = pd.read_csv('https://media.githubusercontent.com/media/Mikkel-schmidt/Elforbrug/main/Data/timeforbrug/' + quote(st.session_state.kunde[0]) + '.csv?token=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', usecols=['Adresse', 'meter', 'amount', 'from', 'bkps'], sep=',')
         #dff = pd.read_feather('https://raw.githubusercontent.com/Mikkel-schmidt/Elforbrug/main/Data/besp/' + st.session_state.kunde[0] + '.csv')
         return df
 
@@ -113,8 +113,10 @@ if check_password():
 
 
     df_besp = pd.read_csv('https://media.githubusercontent.com/media/Mikkel-schmidt/Elforbrug/main/Data/besp/' + quote(st.session_state.kunde[0]) + '.csv?token=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')
+    df_besp = df_besp.sort_values(by='%', ascending=False)
+    
     with col2:
-        st.dataframe(df_besp[['Adresse', 'besparelse', 'årligt forbrug', 'mean', '%']].head(10))
+        st.dataframe(df_besp[['Adresse', 'årligt forbrug',  '%']].head(10))
 
     with col2:
         adr = st.selectbox('Select', df_besp['Adresse'].unique())
