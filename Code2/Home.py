@@ -87,7 +87,7 @@ if check_password():
             Bar()
             .add_xaxis(list(df['tid']))
             .add_yaxis('Samlet forbrug', list(df['amount']), label_opts=opts.LabelOpts(is_show=False, formatter="{b}: {c}"),)
-            .reversal_axis()
+            #.reversal_axis()
             .set_global_opts(
                 datazoom_opts=[opts.DataZoomOpts(type_="inside", orient="vertical"), opts.DataZoomOpts(type_="slider", orient="vertical")], 
                 #legend_opts=opts.LegendOpts(orient='vertical', pos_left="left", is_show=True),
