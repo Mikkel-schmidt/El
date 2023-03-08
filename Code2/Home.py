@@ -89,10 +89,10 @@ if check_password():
             .add_yaxis('Samlet forbrug', list(df['amount']), label_opts=opts.LabelOpts(is_show=False, formatter="{b}: {c}"),)
             #.reversal_axis()
             .set_global_opts(
-                datazoom_opts=[opts.DataZoomOpts(type_="inside", orient="vertical"), opts.DataZoomOpts(type_="slider", orient="vertical")], 
+                #datazoom_opts=[opts.DataZoomOpts(type_="inside", orient="vertical"), opts.DataZoomOpts(type_="slider", orient="vertical")], 
                 #legend_opts=opts.LegendOpts(orient='vertical', pos_left="left", is_show=True),
                 xaxis_opts=opts.AxisOpts(axislabel_opts=opts.LabelOpts(rotate=grader), name='Intensitet [kWh/m2]'),
-                title_opts=opts.TitleOpts(title='Samlet forbrug', pos_left="center"),
+                title_opts=opts.TitleOpts(title='Samlet forbrug pr. måned', pos_left="left"),
                 toolbox_opts=opts.ToolboxOpts(orient='vertical', is_show=False),
             )
             .set_series_opts()
