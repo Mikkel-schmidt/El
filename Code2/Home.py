@@ -106,9 +106,13 @@ if check_password():
     data = df.groupby([df['from'].dt.year, df['from'].dt.month_name(locale='da_DK'), df['from'].dt.month]).agg({'Adresse': 'first', 'amount': 'sum'})
     data = data.reset_index(level=1).rename(columns={'from':'month'}).reset_index(level=1).rename(columns={'from':'month_nr'}).reset_index().rename(columns={'from':'year'})
     data = data.sort_values(['year','month_nr'])
-    #data['tid'] = df['year'].astype(str) + df['month']
+    
     st.write('Data')
     st.write(data)
+    st.write(data.describe())
+    #data['tid'] = df['month'] + df['year'].astype(str)
+    st.write(data)
+
     st.write(df.groupby('meter').agg({'Adresse': 'first', 'amount': 'sum'}).reset_index())
 
 
