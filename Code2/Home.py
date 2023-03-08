@@ -72,6 +72,8 @@ if check_password():
 
     nodes = select_tree()
 
+    st.write(df.groupby(df['from'].dt.month).sum())
+
     @st.cache_resource
     def barr(df, grader):
         df = df.sort_values('årligt forbrug')
@@ -92,7 +94,7 @@ if check_password():
         return b1
 
     with col2:
-        figur = barr(df.groupby(df['from'].dt.month), 90)
+        figur = barr(df.groupby(df['from'].dt.month).sum(), 90)
         st_pyecharts(figur, height='500px')
 
     st.write(df.groupby('meter').agg({'Adresse': 'first', 'amount': 'sum'}).reset_index())
