@@ -78,7 +78,7 @@ if check_password():
 
     nodes = select_tree()
 
-    st.write(df.groupby(df['from'].dt.month).sum().reset_index())
+    #st.write(df.groupby(df['from'].dt.month).sum().reset_index())
 
     @st.cache_resource
     def barr(df, grader):
@@ -111,9 +111,52 @@ if check_password():
         figur = barr(data, 90)
         st_pyecharts(figur, height='500px')
 
+
+    df_besp = pd.read_csv('https://media.githubusercontent.com/media/Mikkel-schmidt/Elforbrug/main/Data/besp/' + quote(st.session_state.kunde[0]) + '.csv?token=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')
+    with col2:
+        st.dataframe(df_besp[['Adresse', 'besparelse', 'årligt forbrug', 'mean', '%']].head(10))
+
+    with col2:
+        adr = st.selectbox('Select', df_besp['Adresse'].unique())
+        dfff = df[df['Adresse']==adr].groupby('from').agg({'meter': 'mean', 'amount': 'sum', 'bkps': 'sum'}).reset_index()
+        st.write('Besparelsen er på ', str(df_besp[df_besp['Adresse']==adr]['%'].values[0].round(1)), ' %')
+
+    @st.cache_resource()
+    def linesss(df):
+        b1 = (
+            Line()
+            .add_xaxis(list(df['from']))
+            .add_yaxis('Timeforbrug', list(df['amount']), symbol='emptyCircle', symbol_size=2, label_opts=opts.LabelOpts(is_show=False,formatter="{b}: {c}"), #areastyle_opts=opts.AreaStyleOpts(opacity=0.5,),# color="#546a67"),
+            linestyle_opts=opts.LineStyleOpts( width=1))
+            .add_yaxis('Activity', list(df['bkps']),  label_opts=opts.LabelOpts(is_show=False,formatter="{b}: {c}"),
+            linestyle_opts=opts.LineStyleOpts( width=3),symbol='emptyCircle', symbol_size=10)
+            .add_yaxis('Best', list(df['bkps'].where(dfff['bkps']==dfff['bkps'].min())),  label_opts=opts.LabelOpts(is_show=False,formatter="{b}: {c}"),
+            linestyle_opts=opts.LineStyleOpts( width=8),symbol='emptyCircle', symbol_size=10)
+            .set_global_opts(
+                legend_opts=opts.LegendOpts(orient='horizontal', pos_left="center", is_show=True),
+                title_opts=opts.TitleOpts(),
+                toolbox_opts=opts.ToolboxOpts(orient='vertical', is_show=False),
+                yaxis_opts=opts.AxisOpts(
+                    name='Forbrug [kWh]',
+                    type_="value",
+                    axistick_opts=opts.AxisTickOpts(is_show=True),
+                    splitline_opts=opts.SplitLineOpts(is_show=True)),
+                xaxis_opts=opts.AxisOpts(name='Tid'),
+                datazoom_opts=[
+                    opts.DataZoomOpts(range_start=0, range_end=100),
+                    opts.DataZoomOpts(type_="inside", range_start=0, range_end=100),
+                ],
+                )
+            .set_series_opts()
+        )
+        return b1
+
+    with col2:
+        figur = linesss(dfff)
+        st_pyecharts(figur, height='300px')
     st.write(data)
 
-    st.write(df.groupby('meter').agg({'Adresse': 'first', 'amount': 'sum'}).reset_index())
+    #st.write(df.groupby('meter').agg({'Adresse': 'first', 'amount': 'sum'}).reset_index())
 
 
 
