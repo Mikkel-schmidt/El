@@ -85,7 +85,7 @@ if check_password():
         #df = df.sort_values('årligt forbrug')
         b1 = (
             Bar()
-            .add_xaxis(list(df['Adresse']))
+            .add_xaxis(list(df['tid']))
             .add_yaxis('Samlet forbrug', list(df['amount']), label_opts=opts.LabelOpts(is_show=False, formatter="{b}: {c}"),)
             .reversal_axis()
             .set_global_opts(
@@ -99,19 +99,18 @@ if check_password():
         )
         return b1
 
-    with col1:
-        figur = barr(df.groupby(df['from'].dt.month).agg({'Adresse': 'first', 'amount': 'sum'}).reset_index(), 90)
-        st_pyecharts(figur, height='500px')
+
 
     data = df.groupby([df['from'].dt.year, df['from'].dt.month_name(locale='da_DK'), df['from'].dt.month]).agg({'Adresse': 'first', 'amount': 'sum'})
     data = data.reset_index(level=1).rename(columns={'from':'month'}).reset_index(level=1).rename(columns={'from':'month_nr'}).reset_index().rename(columns={'from':'year'})
     data = data.sort_values(['year','month_nr'])
-    
-    st.write('Data')
-    st.write(data)
-    st.write(data.dtypes)
-    #data['tid'] = data.year.str.cat(data.month)
-    data['tid'] = data['month'] + data['year'].astype(str)
+
+    data['tid'] = data['month'] + ' ' + data['year'].astype(str)
+
+    with col1:
+        figur = barr(data, 90)
+        st_pyecharts(figur, height='500px')
+
     st.write(data)
 
     st.write(df.groupby('meter').agg({'Adresse': 'first', 'amount': 'sum'}).reset_index())
