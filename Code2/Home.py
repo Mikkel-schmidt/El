@@ -18,6 +18,12 @@ from pyecharts import options as opts
 from pyecharts.charts import Bar, Pie, Grid, Line, Scatter, Sankey, WordCloud, HeatMap, Calendar, Sunburst, TreeMap
 from streamlit_echarts import st_pyecharts
 
+import locale
+#for lang in locale.windows_locale.values():
+#    st.write(lang)
+
+locale.setlocale(locale.LC_ALL, "da_DK")
+
 
 
 def run_again():
