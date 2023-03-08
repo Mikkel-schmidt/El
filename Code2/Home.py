@@ -72,7 +72,7 @@ if check_password():
 
     nodes = select_tree()
 
-    st.write(df.groupby(df['from'].dt.month).sum())
+    st.write(df.groupby(df['from'].dt.month).sum().reset_index())
 
     @st.cache_resource
     def barr(df, grader):
