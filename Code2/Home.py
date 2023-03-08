@@ -97,6 +97,10 @@ if check_password():
         figur = barr(df.groupby(df['from'].dt.month).agg({'Adresse': 'first', 'amount': 'sum'}).reset_index(), 90)
         st_pyecharts(figur, height='500px')
 
+    data = df.groupby([df['from'].dt.year, df['from'].dt.month_name(locale='danish'), df['from'].dt.month]).agg({'Adresse': 'first', 'Amount': 'sum'})
+    data = data.reset_index(level=1).rename(columns={'from':'month'}).reset_index(level=1).rename(columns={'from':'month_nr'}).reset_index().rename(columns={'from':'year'})
+    data = data.sort_values(['year','month_nr'])
+    st.write(data)
     st.write(df.groupby('meter').agg({'Adresse': 'first', 'amount': 'sum'}).reset_index())
 
 
