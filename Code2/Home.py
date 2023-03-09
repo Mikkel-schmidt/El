@@ -114,7 +114,7 @@ if check_password():
     st_pyecharts(figur, height='200px')
 
     col1, col2, col3, col4 = st.columns(4)
-    col2.metric('Forbrug i 2022', data[data['year']==2022]['amount'].sum().set_precision(0), 1)
+    col2.metric('Forbrug i 2022', data[data['year']==2022]['amount'].sum().style.set_precision(0), 1)
     col3.metric('Gns. dagsforbrug i denne måned', data[(data['year']==2022) & (data['month'] == 'Februar')]['amount'].sum().set_precision(0))
 
 
