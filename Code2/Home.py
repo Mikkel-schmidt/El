@@ -108,7 +108,7 @@ if check_password():
     data['tid'] = data['month'] + ' ' + data['year'].astype(str)
 
     #with col1:
-    figur = barr(data, 45)
+    figur = barr(data, 30)
     st_pyecharts(figur, height='200px')
 
 
@@ -118,10 +118,10 @@ if check_password():
     #with col2:
     st.dataframe(df_besp[['Adresse', 'årligt forbrug',  '%']].head(10).style.background_gradient(cmap='Reds').set_precision(1))
 
-    with col2:
-        adr = st.selectbox('Select', df_besp['Adresse'].unique())
-        dfff = df[df['Adresse']==adr].groupby('from').agg({'meter': 'mean', 'amount': 'sum', 'bkps': 'sum'}).reset_index()
-        st.write('Besparelsen er på ', str(df_besp[df_besp['Adresse']==adr]['%'].values[0].round(1)), ' %')
+    #with col2:
+    adr = st.selectbox('Select', df_besp['Adresse'].unique())
+    dfff = df[df['Adresse']==adr].groupby('from').agg({'meter': 'mean', 'amount': 'sum', 'bkps': 'sum'}).reset_index()
+    st.write('Besparelsen er på ', str(df_besp[df_besp['Adresse']==adr]['%'].values[0].round(1)), ' %')
 
     @st.cache_resource()
     def linesss(df):
