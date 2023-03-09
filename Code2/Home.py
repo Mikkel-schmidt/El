@@ -106,6 +106,7 @@ if check_password():
     data = data.sort_values(['year','month_nr'])
 
     data['tid'] = data['month'] + ' ' + data['year'].astype(str)
+    st.write(data)
 
     #with col1:
     figur = barr(data, 30)
