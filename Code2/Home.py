@@ -115,8 +115,8 @@ if check_password():
     df_besp = pd.read_csv('https://media.githubusercontent.com/media/Mikkel-schmidt/Elforbrug/main/Data/besp/' + quote(st.session_state.kunde[0]) + '.csv?token=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')
     df_besp = df_besp.sort_values(by='%', ascending=False)
     
-    with col2:
-        st.dataframe(df_besp[['Adresse', 'årligt forbrug',  '%']].head(10))
+    #with col2:
+    st.dataframe(df_besp[['Adresse', 'årligt forbrug',  '%']].head(10).style.background_gradient(cmap='Reds').set_precision(1))
 
     with col2:
         adr = st.selectbox('Select', df_besp['Adresse'].unique())
@@ -153,10 +153,10 @@ if check_password():
         )
         return b1
 
-    with col2:
-        figur = linesss(dfff)
-        st_pyecharts(figur, height='300px')
-    st.write(data)
+    #with col2:
+    figur = linesss(dfff)
+    st_pyecharts(figur, height='300px')
+    #st.write(data)
 
     #st.write(df.groupby('meter').agg({'Adresse': 'first', 'amount': 'sum'}).reset_index())
 
