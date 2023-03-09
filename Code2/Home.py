@@ -92,7 +92,7 @@ if check_password():
                 #datazoom_opts=[opts.DataZoomOpts(type_="inside", orient="vertical"), opts.DataZoomOpts(type_="slider", orient="vertical")], 
                 #legend_opts=opts.LegendOpts(orient='vertical', pos_left="left", is_show=True),
                 xaxis_opts=opts.AxisOpts(axislabel_opts=opts.LabelOpts(rotate=grader), name='Intensitet [kWh/m2]'),
-                title_opts=opts.TitleOpts(title='Samlet forbrug pr. måned', pos_left="left"),
+                title_opts=opts.TitleOpts(title='', pos_left="left"),
                 toolbox_opts=opts.ToolboxOpts(orient='vertical', is_show=False),
             )
             .set_series_opts()
@@ -113,6 +113,7 @@ if check_password():
 
     col1, col2, col3, col4 = st.columns(4)
     col1.metric('Forbrug ', 10, 1)
+    col2.metric('Forbrug i 2022', 1234124)
 
 
     df_besp = pd.read_csv('https://media.githubusercontent.com/media/Mikkel-schmidt/Elforbrug/main/Data/besp/' + quote(st.session_state.kunde[0]) + '.csv?token=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')
