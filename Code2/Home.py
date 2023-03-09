@@ -122,8 +122,12 @@ if check_password():
     df_besp = df_besp.sort_values(by='%', ascending=False) 
     
     #with col2:
-    _, col, _ = st.columns([1,2,1])
-    col.dataframe(df_besp[['Adresse', 'årligt forbrug',  '%']].head(10).style.background_gradient(cmap='Reds').set_precision(1))
+    col1 , col2= st.columns([1,1])
+    col1.dataframe(df_besp[['Adresse', 'årligt forbrug',  '%']].head(10).style.background_gradient(cmap='Reds').set_precision(1))
+    if 'df_g' in st.session_state:
+        col1.dataframe(st.session_state['df_g'].head(10).style.background_gradient(cmap='Reds').set_precision(1))
+
+
 
     #with col2:
     adr = st.selectbox('Select', df_besp['Adresse'].unique())
