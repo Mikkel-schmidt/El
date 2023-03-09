@@ -111,6 +111,9 @@ if check_password():
     figur = barr(data, 30)
     st_pyecharts(figur, height='200px')
 
+    col1, col2, col3, col4 = st.columns(4)
+    col1.metric('Forbrug ', 10, 1)
+
 
     df_besp = pd.read_csv('https://media.githubusercontent.com/media/Mikkel-schmidt/Elforbrug/main/Data/besp/' + quote(st.session_state.kunde[0]) + '.csv?token=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')
     df_besp = df_besp.sort_values(by='%', ascending=False)
