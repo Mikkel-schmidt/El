@@ -108,7 +108,7 @@ if check_password():
     data['tid'] = data['month'] + ' ' + data['year'].astype(str)
 
     #with col1:
-    figur = barr(data, 90)
+    figur = barr(data, 45)
     st_pyecharts(figur, height='200px')
 
 
