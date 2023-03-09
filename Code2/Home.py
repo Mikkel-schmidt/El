@@ -106,8 +106,8 @@ if check_password():
     data = data.sort_values(['year','month_nr'])
 
     data['tid'] = data['month'] + ' ' + data['year'].astype(str)
-    st.write(data)
-    st.write(data[data['year']==2022]['amount'].sum())
+    #st.write(data)
+    #st.write(data[data['year']==2022]['amount'].sum())
 
     #with col1:
     figur = barr(data, 30)
