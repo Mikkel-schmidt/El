@@ -73,7 +73,7 @@ def linesss(df):
         Line()
         .add_xaxis(list(df['from']))
         .add_yaxis('Timeforbrug', list(df['amount']), symbol='emptyCircle', symbol_size=2, label_opts=opts.LabelOpts(is_show=False,formatter="{b}: {c}"), #areastyle_opts=opts.AreaStyleOpts(opacity=0.5,),# color="#546a67"),
-        linestyle_opts=opts.LineStyleOpts( width=1))
+        linestyle_opts=opts.LineStyleOpts( width=1), areastyle_opts=opts.AreaStyleOpts(opacity=0.3),)
         .add_yaxis('Activity', list(df['bkps']),  label_opts=opts.LabelOpts(is_show=False,formatter="{b}: {c}"),
         linestyle_opts=opts.LineStyleOpts( width=3),symbol='emptyCircle', symbol_size=10)
         .add_yaxis('Best', list(df['bkps'].where(df['bkps']==df['bkps'].min())),  label_opts=opts.LabelOpts(is_show=False,formatter="{b}: {c}"),
