@@ -125,7 +125,7 @@ if check_password():
     col1 , col2= st.columns([1,1])
     col1.dataframe(df_besp[['Adresse', 'årligt forbrug',  '%']].head(10).style.background_gradient(cmap='Reds').set_precision(1))
     if 'df_g' in st.session_state:
-        col1.dataframe(st.session_state['df_g'].head(10).style.background_gradient(cmap='Reds').set_precision(1))
+        col1.dataframe(st.session_state['df_g'].head(10).style.background_gradient(cmap='Blues').set_precision(1))
 
 
 
