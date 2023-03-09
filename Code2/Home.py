@@ -107,9 +107,9 @@ if check_password():
 
     data['tid'] = data['month'] + ' ' + data['year'].astype(str)
 
-    with col1:
-        figur = barr(data, 90)
-        st_pyecharts(figur, height='500px')
+    #with col1:
+    figur = barr(data, 90)
+    st_pyecharts(figur, height='200px')
 
 
     df_besp = pd.read_csv('https://media.githubusercontent.com/media/Mikkel-schmidt/Elforbrug/main/Data/besp/' + quote(st.session_state.kunde[0]) + '.csv?token=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')
