@@ -114,8 +114,8 @@ if check_password():
     st_pyecharts(figur, height='200px')
 
     col1, col2, col3, col4 = st.columns(4)
-    col2.metric('Forbrug i 2022', data[data['year']==2022]['amount'].sum(), 1)
-    col3.metric('Gns. dagsforbrug i denne måned', data[(data['year']==2022) & (data['month'] == 'Februar')]['amount'].sum())
+    col2.metric('Forbrug i 2022', '{:.2f} kWh'.format(data[data['year']==2022]['amount'].sum()) )
+    col3.metric('Forbrug i sidste måned', '{:.2f} kWh'.format(data[(data['year']==2022) & (data['month'] == 'Februar')]['amount'].sum()))
 
 
     df_besp = pd.read_csv('https://media.githubusercontent.com/media/Mikkel-schmidt/Elforbrug/main/Data/besp/' + quote(st.session_state.kunde[0]) + '.csv?token=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')
