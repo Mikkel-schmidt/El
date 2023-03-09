@@ -122,11 +122,12 @@ if check_password():
     df_besp = df_besp.sort_values(by='%', ascending=False) 
     
     #with col2:
+    st.markdown('---')
     col1 , col2= st.columns([1,1])
-    col1.write('Top 10 driftsforbedringer')
+    col1.header('Top 10 driftsforbedringer')
     col1.dataframe(df_besp[['Adresse', 'årligt forbrug',  '%']].head(10).style.background_gradient(cmap='Reds').set_precision(1))
     if 'df_g' in st.session_state:
-        col2.write('Top 10 standby forbedringer')
+        col2.header('Top 10 standby forbedringer')
         col2.dataframe(st.session_state['df_g'].head(10).style.background_gradient(cmap='Blues').set_precision(1))
 
 
