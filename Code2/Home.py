@@ -107,14 +107,14 @@ if check_password():
 
     data['tid'] = data['month'] + ' ' + data['year'].astype(str)
     st.write(data)
-    st.write(data[data['year']==2022])
+    st.write(data[data['year']==2022]['amount'].sum())
 
     #with col1:
     figur = barr(data, 30)
     st_pyecharts(figur, height='200px')
 
     col1, col2, col3, col4 = st.columns(4)
-    col2.metric('Forbrug i 2022', data[data['year']==2022].sum(), 1)
+    col2.metric('Forbrug i 2022', data[data['year']==2022]['amount'].sum(), 1)
     col3.metric('Gns. dagsforbrug i denne måned', 1234124)
 
 
