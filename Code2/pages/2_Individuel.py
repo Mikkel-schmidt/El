@@ -175,7 +175,6 @@ df_norm = df[df['bkps']==df['bkps'].iloc[-1]].groupby('from').agg({'meter': 'mea
 uge = ugeprofil(df_opti)
 uge2 = ugeprofil(df_norm)
 
-st.write(dagsprofil(df_norm))
 st.write(uge2)
 
 #st.write(ug)
