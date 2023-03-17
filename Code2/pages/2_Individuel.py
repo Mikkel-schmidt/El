@@ -439,7 +439,7 @@ def Calendarr(df, maxx, aar):
         .add(series_name=str(aar),
     yaxis_data=data,
     calendar_opts=opts.CalendarOpts(
-    pos_left="30",
+    pos_left="30" ,
     pos_right="30",
     range_=str(aar), 
     yearlabel_opts=opts.CalendarYearLabelOpts(is_show=False),
