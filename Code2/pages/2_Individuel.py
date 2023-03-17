@@ -168,9 +168,8 @@ def ugeprofil(df):
 #@st.cache_data
 def dagsprofil(df):
     dff = df.groupby([df['from'].dt.day_name(locale='da_DK'), df['from'].dt.hour]).mean().reset_index(names=['day', 'hour'])
-    dff.sort_values(['day_', 'hour'], ascending=True, inplace=True)
-    #st.write(dff)
-    dff['x-axis'] = dff.apply(lambda row: row['day'] + ' kl. ' + str(row['hour']), axis=1)
+
+    #dff['x-axis'] = dff.apply(lambda row: row['day'] + ' kl. ' + str(row['hour']), axis=1)
     return dff
 
 if df['bkps'].iloc[-1] >= df['bkps'].max():
