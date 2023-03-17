@@ -228,13 +228,13 @@ with col1:
     figur = liness(uge2, uge)
     st_pyecharts(figur, height='400px')
 
-st.write(uge2['hour'].unique()[0])
+st.write(uge2['hour'].unique())
 
 @st.cache_resource
 def liness(df):
     b1 = (
         Line()
-        .add_xaxis(list(df['hour'].unique()[0]))
+        .add_xaxis(list(df['hour'].unique()))
         .add_yaxis('Timeforbrug', list(df['amount'][df['day']=='Mandag']), symbol='emptyCircle', symbol_size=0, label_opts=opts.LabelOpts(is_show=False,formatter="{b}: {c}"), #areastyle_opts=opts.AreaStyleOpts(opacity=0.5,),# color="#546a67"),
         linestyle_opts=opts.LineStyleOpts(width=1), 
         )
