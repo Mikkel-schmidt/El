@@ -235,7 +235,7 @@ st.write(list(uge2[uge2['day']=='Mandag']['amount']))
 def liness(df):
     b1 = (
         Line()
-        .add_xaxis(list(df['hour'].unique()))
+        .add_xaxis(list(str(df['hour'].unique())))
         .add_yaxis('Timeforbrug', list(df[df['day']=='Mandag']['amount']), symbol='emptyCircle', symbol_size=0, label_opts=opts.LabelOpts(is_show=False,formatter="{b}: {c}"), #areastyle_opts=opts.AreaStyleOpts(opacity=0.5,),# color="#546a67"),
         linestyle_opts=opts.LineStyleOpts(width=1), 
         )
