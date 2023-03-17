@@ -229,6 +229,7 @@ with col1:
     st_pyecharts(figur, height='400px')
 
 st.write(list(uge2['hour'].unique()))
+st.write(list(uge2[uge2['day']=='Mandag']['amount']))
 
 @st.cache_resource
 def liness(df):
