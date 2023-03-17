@@ -151,7 +151,7 @@ with col1:
 def ugeprofil(df):
     dff = df.groupby([df['from'].dt.day_name(locale='da_DK'), df['from'].dt.hour]).agg({'amount': ['mean', 'std']}).reset_index(names=['day', 'hour'])
     dff.columns = ['_'.join(tup).rstrip('_') for tup in dff.columns.values]
-    st.write(dff)
+    #st.write(dff)
     dff['day_'] = dff['day']
     dff['day_'].replace({
             "Mandag": 0,
@@ -177,7 +177,7 @@ df_norm = df[df['bkps']==df['bkps'].iloc[-1]].groupby('from').agg({'meter': 'mea
 uge = ugeprofil(df_opti)
 uge2 = ugeprofil(df_norm)
 
-st.write(uge2)
+#st.write(uge2)
 
 #st.write(ug)
 #st.write(ug2)
@@ -222,8 +222,8 @@ with col1:
     figur = liness(uge2, uge)
     st_pyecharts(figur, height='400px')
 
-st.write(list(uge2['hour'].unique()))
-st.write(list(uge2[uge2['day']=='Mandag']['amount_mean']))
+#st.write(list(uge2['hour'].unique()))
+#st.write(list(uge2[uge2['day']=='Mandag']['amount_mean']))
 
 @st.cache_resource
 def liness(df):
