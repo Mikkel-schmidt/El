@@ -228,7 +228,7 @@ with col1:
     figur = liness(uge2, uge)
     st_pyecharts(figur, height='400px')
 
-st.write(uge2['hour'].unique())
+st.write(uge2['hour'].unique()[0])
 
 @st.cache_resource
 def liness(df):
