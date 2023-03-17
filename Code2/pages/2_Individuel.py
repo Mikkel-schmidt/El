@@ -168,11 +168,11 @@ def ugeprofil(df):
     return dff
 
 if df['bkps'].iloc[-1] >= df['bkps'].max():
-    df_opti = df[df['bkps']==df['bkps'].iloc[-1]].groupby('from').agg({'meter': 'mean', 'amount_mean': 'sum', 'day-moment': 'first'}).reset_index()
+    df_opti = df[df['bkps']==df['bkps'].iloc[-1]].groupby('from').agg({'meter': 'mean', 'amount': 'sum', 'day-moment': 'first'}).reset_index()
 else:
-    df_opti = df[df['bkps']==df['bkps'].min()].groupby('from').agg({'meter': 'mean', 'amount_mean': 'sum', 'day-moment': 'first'}).reset_index()
+    df_opti = df[df['bkps']==df['bkps'].min()].groupby('from').agg({'meter': 'mean', 'amount': 'sum', 'day-moment': 'first'}).reset_index()
 
-df_norm = df[df['bkps']==df['bkps'].iloc[-1]].groupby('from').agg({'meter': 'mean', 'amount_mean': 'sum', 'day-moment': 'first'}).reset_index()
+df_norm = df[df['bkps']==df['bkps'].iloc[-1]].groupby('from').agg({'meter': 'mean', 'amount': 'sum', 'day-moment': 'first'}).reset_index()
 
 uge = ugeprofil(df_opti)
 uge2 = ugeprofil(df_norm)
