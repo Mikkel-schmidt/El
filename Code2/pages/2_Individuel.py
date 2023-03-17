@@ -167,7 +167,7 @@ def ugeprofil(df):
 
 #@st.cache_data
 def dagsprofil(df):
-    dff = df.groupby(df['from'].dt.hour).mean().reset_index(names=['day', 'hour'])
+    dff = df.groupby(df['from'].dt.hour).mean().reset_index(names=['hour'])
 
     #dff['x-axis'] = dff.apply(lambda row: row['day'] + ' kl. ' + str(row['hour']), axis=1)
     return dff
