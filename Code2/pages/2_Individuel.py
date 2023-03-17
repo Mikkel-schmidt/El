@@ -229,14 +229,11 @@ with col1:
     st_pyecharts(figur, height='400px')
 
 @st.cache_resource
-def liness(df, df2):
+def liness(df):
     b1 = (
         Line()
-        .add_xaxis(list(df['x-axis']))
-        .add_yaxis('Timeforbrug', list(df['amount']), symbol='emptyCircle', symbol_size=0, label_opts=opts.LabelOpts(is_show=False,formatter="{b}: {c}"), #areastyle_opts=opts.AreaStyleOpts(opacity=0.5,),# color="#546a67"),
-        linestyle_opts=opts.LineStyleOpts(width=1), 
-        )
-        .add_yaxis('Optimeret', list(df2['amount']), symbol='emptyCircle', symbol_size=1, label_opts=opts.LabelOpts(is_show=False,formatter="{b}: {c}"), #areastyle_opts=opts.AreaStyleOpts(opacity=0.5,),# color="#546a67"),
+        .add_xaxis(list(df['hour'].unique()))
+        .add_yaxis('Timeforbrug', list(df['amount'][df['day']=='Mandag']), symbol='emptyCircle', symbol_size=0, label_opts=opts.LabelOpts(is_show=False,formatter="{b}: {c}"), #areastyle_opts=opts.AreaStyleOpts(opacity=0.5,),# color="#546a67"),
         linestyle_opts=opts.LineStyleOpts(width=1), 
         )
         .set_global_opts(
@@ -258,7 +255,7 @@ def liness(df, df2):
     return b1
 
 with col1:
-    figur = liness(uge2, uge)
+    figur = liness(uge2)
     st_pyecharts(figur, height='400px')
 
 
