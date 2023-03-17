@@ -165,6 +165,14 @@ def ugeprofil(df):
     dff['x-axis'] = dff.apply(lambda row: row['day'] + ' kl. ' + str(row['hour']), axis=1)
     return dff
 
+#@st.cache_data
+def dagsprofil(df):
+    dff = df.groupby([df['from'].dt.day_name(locale='da_DK'), df['from'].dt.hour]).mean().reset_index(names=['day', 'hour'])
+    dff.sort_values(['day_', 'hour'], ascending=True, inplace=True)
+    #st.write(dff)
+    dff['x-axis'] = dff.apply(lambda row: row['day'] + ' kl. ' + str(row['hour']), axis=1)
+    return dff
+
 if df['bkps'].iloc[-1] >= df['bkps'].max():
     df_opti = df[df['bkps']==df['bkps'].iloc[-1]].groupby('from').agg({'meter': 'mean', 'amount': 'sum', 'day-moment': 'first'}).reset_index()
 else:
@@ -175,6 +183,8 @@ df_norm = df[df['bkps']==df['bkps'].iloc[-1]].groupby('from').agg({'meter': 'mea
 uge = ugeprofil(df_opti)
 uge2 = ugeprofil(df_norm)
 
+st.write(dagsprofil(df_norm))
+
 #st.write(ug)
 #st.write(ug2)
 ugg = uge[['day', 'hour', 'amount', 'x-axis']].merge(uge2[['day', 'hour', 'amount']], how='outer', on=['day', 'hour'], suffixes=('_opti', '_now'))
@@ -182,6 +192,8 @@ ugg['besparelse_kwh'] = ugg['amount_now'] - ugg['amount_opti']
 st.write('Mulig besparelse på ' + str(ugg['besparelse_kwh'].sum()*52) + ' kWh')
 st.write('Årlig forbrug på ' + str(ugg['amount_now'].sum()*52) + ' kWh')
 st.write('Mulig besparelse på ' + str((ugg['besparelse_kwh'].sum()*52)/(ugg['amount_now'].sum()*52)*100) + '%')
+
+
 
 @st.cache_resource
 def liness(df, df2):
