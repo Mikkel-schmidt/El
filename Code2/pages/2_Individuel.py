@@ -168,11 +168,11 @@ def ugeprofil(df):
     return dff
 
 if df['bkps'].iloc[-1] >= df['bkps'].max():
-    df_opti = df[df['bkps']==df['bkps'].iloc[-1]].groupby('from').agg({'meter': 'mean', 'amount': 'sum', 'day-moment': 'first'}).reset_index()
+    df_opti = df[df['bkps']==df['bkps'].iloc[-1]].groupby('from').agg({'meter': 'mean', 'amount_mean': 'sum', 'day-moment': 'first'}).reset_index()
 else:
-    df_opti = df[df['bkps']==df['bkps'].min()].groupby('from').agg({'meter': 'mean', 'amount': 'sum', 'day-moment': 'first'}).reset_index()
+    df_opti = df[df['bkps']==df['bkps'].min()].groupby('from').agg({'meter': 'mean', 'amount_mean': 'sum', 'day-moment': 'first'}).reset_index()
 
-df_norm = df[df['bkps']==df['bkps'].iloc[-1]].groupby('from').agg({'meter': 'mean', 'amount': 'sum', 'day-moment': 'first'}).reset_index()
+df_norm = df[df['bkps']==df['bkps'].iloc[-1]].groupby('from').agg({'meter': 'mean', 'amount_mean': 'sum', 'day-moment': 'first'}).reset_index()
 
 uge = ugeprofil(df_opti)
 uge2 = ugeprofil(df_norm)
@@ -181,7 +181,7 @@ st.write(uge2)
 
 #st.write(ug)
 #st.write(ug2)
-ugg = uge[['day', 'hour', 'amount', 'x-axis']].merge(uge2[['day', 'hour', 'amount']], how='outer', on=['day', 'hour'], suffixes=('_opti', '_now'))
+ugg = uge[['day', 'hour', 'amount_mean', 'x-axis']].merge(uge2[['day', 'hour', 'amount_mean']], how='outer', on=['day', 'hour'], suffixes=('_opti', '_now'))
 ugg['besparelse_kwh'] = ugg['amount_now'] - ugg['amount_opti']
 st.write('Mulig besparelse på ' + str(ugg['besparelse_kwh'].sum()*52) + ' kWh')
 st.write('Årlig forbrug på ' + str(ugg['amount_now'].sum()*52) + ' kWh')
@@ -194,10 +194,10 @@ def liness(df, df2):
     b1 = (
         Line()
         .add_xaxis(list(df['x-axis']))
-        .add_yaxis('Timeforbrug', list(df['amount']), symbol='emptyCircle', symbol_size=0, label_opts=opts.LabelOpts(is_show=False,formatter="{b}: {c}"), #areastyle_opts=opts.AreaStyleOpts(opacity=0.5,),# color="#546a67"),
+        .add_yaxis('Timeforbrug', list(df['amount_mean']), symbol='emptyCircle', symbol_size=0, label_opts=opts.LabelOpts(is_show=False,formatter="{b}: {c}"), #areastyle_opts=opts.AreaStyleOpts(opacity=0.5,),# color="#546a67"),
         linestyle_opts=opts.LineStyleOpts(width=1), 
         )
-        .add_yaxis('Optimeret', list(df2['amount']), symbol='emptyCircle', symbol_size=1, label_opts=opts.LabelOpts(is_show=False,formatter="{b}: {c}"), #areastyle_opts=opts.AreaStyleOpts(opacity=0.5,),# color="#546a67"),
+        .add_yaxis('Optimeret', list(df2['amount_mean']), symbol='emptyCircle', symbol_size=1, label_opts=opts.LabelOpts(is_show=False,formatter="{b}: {c}"), #areastyle_opts=opts.AreaStyleOpts(opacity=0.5,),# color="#546a67"),
         linestyle_opts=opts.LineStyleOpts(width=1), 
         )
         .set_global_opts(
@@ -223,26 +223,26 @@ with col1:
     st_pyecharts(figur, height='400px')
 
 st.write(list(uge2['hour'].unique()))
-st.write(list(uge2[uge2['day']=='Mandag']['amount']))
+st.write(list(uge2[uge2['day']=='Mandag']['amount_mean']))
 
 @st.cache_resource
 def liness(df):
     b1 = (
         Line()
         .add_xaxis(list(df['hour'].unique().astype(str)))
-        .add_yaxis('Mandag', list(df[df['day']=='Mandag']['amount']), symbol='emptyCircle', symbol_size=0, label_opts=opts.LabelOpts(is_show=False,formatter="{b}: {c}"), #areastyle_opts=opts.AreaStyleOpts(opacity=0.5,),# color="#546a67"),
+        .add_yaxis('Mandag', list(df[df['day']=='Mandag']['amount_mean']), symbol='emptyCircle', symbol_size=0, label_opts=opts.LabelOpts(is_show=False,formatter="{b}: {c}"), #areastyle_opts=opts.AreaStyleOpts(opacity=0.5,),# color="#546a67"),
         linestyle_opts=opts.LineStyleOpts(width=1), )
-        .add_yaxis('Tirsdag', list(df[df['day']=='Tirsdag']['amount']), symbol='emptyCircle', symbol_size=0, label_opts=opts.LabelOpts(is_show=False,formatter="{b}: {c}"), #areastyle_opts=opts.AreaStyleOpts(opacity=0.5,),# color="#546a67"),
+        .add_yaxis('Tirsdag', list(df[df['day']=='Tirsdag']['amount_mean']), symbol='emptyCircle', symbol_size=0, label_opts=opts.LabelOpts(is_show=False,formatter="{b}: {c}"), #areastyle_opts=opts.AreaStyleOpts(opacity=0.5,),# color="#546a67"),
         linestyle_opts=opts.LineStyleOpts(width=1), )
-        .add_yaxis('Onsdag', list(df[df['day']=='Onsdag']['amount']), symbol='emptyCircle', symbol_size=0, label_opts=opts.LabelOpts(is_show=False,formatter="{b}: {c}"), #areastyle_opts=opts.AreaStyleOpts(opacity=0.5,),# color="#546a67"),
+        .add_yaxis('Onsdag', list(df[df['day']=='Onsdag']['amount_mean']), symbol='emptyCircle', symbol_size=0, label_opts=opts.LabelOpts(is_show=False,formatter="{b}: {c}"), #areastyle_opts=opts.AreaStyleOpts(opacity=0.5,),# color="#546a67"),
         linestyle_opts=opts.LineStyleOpts(width=1), )
-        .add_yaxis('Torsdag', list(df[df['day']=='Torsdag']['amount']), symbol='emptyCircle', symbol_size=0, label_opts=opts.LabelOpts(is_show=False,formatter="{b}: {c}"), #areastyle_opts=opts.AreaStyleOpts(opacity=0.5,),# color="#546a67"),
+        .add_yaxis('Torsdag', list(df[df['day']=='Torsdag']['amount_mean']), symbol='emptyCircle', symbol_size=0, label_opts=opts.LabelOpts(is_show=False,formatter="{b}: {c}"), #areastyle_opts=opts.AreaStyleOpts(opacity=0.5,),# color="#546a67"),
         linestyle_opts=opts.LineStyleOpts(width=1), )
-        .add_yaxis('Fredag', list(df[df['day']=='Fredag']['amount']), symbol='emptyCircle', symbol_size=0, label_opts=opts.LabelOpts(is_show=False,formatter="{b}: {c}"), #areastyle_opts=opts.AreaStyleOpts(opacity=0.5,),# color="#546a67"),
+        .add_yaxis('Fredag', list(df[df['day']=='Fredag']['amount_mean']), symbol='emptyCircle', symbol_size=0, label_opts=opts.LabelOpts(is_show=False,formatter="{b}: {c}"), #areastyle_opts=opts.AreaStyleOpts(opacity=0.5,),# color="#546a67"),
         linestyle_opts=opts.LineStyleOpts(width=1), )
-        .add_yaxis('Lørdag', list(df[df['day']=='Lørdag']['amount']), symbol='emptyCircle', symbol_size=0, label_opts=opts.LabelOpts(is_show=False,formatter="{b}: {c}"), #areastyle_opts=opts.AreaStyleOpts(opacity=0.5,),# color="#546a67"),
+        .add_yaxis('Lørdag', list(df[df['day']=='Lørdag']['amount_mean']), symbol='emptyCircle', symbol_size=0, label_opts=opts.LabelOpts(is_show=False,formatter="{b}: {c}"), #areastyle_opts=opts.AreaStyleOpts(opacity=0.5,),# color="#546a67"),
         linestyle_opts=opts.LineStyleOpts(width=1), )
-        .add_yaxis('Søndag', list(df[df['day']=='Søndag']['amount']), symbol='emptyCircle', symbol_size=0, label_opts=opts.LabelOpts(is_show=False,formatter="{b}: {c}"), #areastyle_opts=opts.AreaStyleOpts(opacity=0.5,),# color="#546a67"),
+        .add_yaxis('Søndag', list(df[df['day']=='Søndag']['amount_mean']), symbol='emptyCircle', symbol_size=0, label_opts=opts.LabelOpts(is_show=False,formatter="{b}: {c}"), #areastyle_opts=opts.AreaStyleOpts(opacity=0.5,),# color="#546a67"),
         linestyle_opts=opts.LineStyleOpts(width=1), )
         .set_global_opts(
             legend_opts=opts.LegendOpts(orient='horizontal', pos_left="center", is_show=True),
