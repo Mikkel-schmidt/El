@@ -182,10 +182,10 @@ st.write(uge2)
 #st.write(ug)
 #st.write(ug2)
 ugg = uge[['day', 'hour', 'amount_mean', 'x-axis']].merge(uge2[['day', 'hour', 'amount_mean']], how='outer', on=['day', 'hour'], suffixes=('_opti', '_now'))
-ugg['besparelse_kwh'] = ugg['amount_now'] - ugg['amount_opti']
+ugg['besparelse_kwh'] = ugg['amount_mean_now'] - ugg['amount_mean_opti']
 st.write('Mulig besparelse på ' + str(ugg['besparelse_kwh'].sum()*52) + ' kWh')
-st.write('Årlig forbrug på ' + str(ugg['amount_now'].sum()*52) + ' kWh')
-st.write('Mulig besparelse på ' + str((ugg['besparelse_kwh'].sum()*52)/(ugg['amount_now'].sum()*52)*100) + '%')
+st.write('Årlig forbrug på ' + str(ugg['amount_mean_now'].sum()*52) + ' kWh')
+st.write('Mulig besparelse på ' + str((ugg['besparelse_kwh'].sum()*52)/(ugg['amount_mean_now'].sum()*52)*100) + '%')
 
 
 
@@ -262,7 +262,7 @@ def liness(df):
     )
     return b1
 
-with col1:
+with col2:
     figur = liness(uge2)
     st_pyecharts(figur, height='400px')
 
