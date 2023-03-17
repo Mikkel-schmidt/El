@@ -149,7 +149,7 @@ with col1:
 
 @st.cache_data
 def ugeprofil(df):
-    dff = df.groupby([df['from'].dt.day_name(locale='da_DK'), df['from'].dt.hour]).agg({'amount': 'mean', 'amount': 'std'})#.reset_index(names=['day', 'hour'])
+    dff = df.groupby([df['from'].dt.day_name(locale='da_DK'), df['from'].dt.hour]).agg({'amount': ['mean', 'std']})#.reset_index(names=['day', 'hour'])
     st.write(dff)
     dff['day_'] = dff['day']
     dff['day_'].replace({
