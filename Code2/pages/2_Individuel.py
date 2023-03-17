@@ -430,7 +430,7 @@ maxx = df.groupby(df['from'].dt.day).mean()['amount'].max()
 minn = df.groupby(df['from'].dt.day).mean()['amount'].min()
 aar = col2.multiselect('Vælg år', df['from'].dt.year.unique(), default=2022)
 
-
+ 
 @st.cache_resource
 def Calendarr(df, maxx, aar):
     data = [[df.loc[i, 'from'], df.loc[i, 'amount']] for i in range(len(df['from']))]
