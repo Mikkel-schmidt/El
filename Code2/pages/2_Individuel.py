@@ -452,7 +452,7 @@ def Calendarr(df, maxx, aar):
             ),
             toolbox_opts=opts.ToolboxOpts(orient='vertical', is_show=False),
             visualmap_opts=opts.VisualMapOpts(
-            max_= maxx, min_=0, orient="horizontal", is_piecewise=False 
+            max_= maxx, min_=minn, orient="horizontal", is_piecewise=False 
             ),
         )
         .set_series_opts(
