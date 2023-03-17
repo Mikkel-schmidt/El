@@ -262,7 +262,7 @@ def liness(df):
     )
     return b1
 
-with col2:
+with col1:
     figur = liness(uge2)
     st_pyecharts(figur, height='400px')
 
