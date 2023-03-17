@@ -462,7 +462,7 @@ def Calendarr(df, maxx, aar):
 #st.write(df)
 #st.write(df.groupby('from').sum().reset_index())
 for i in aar:
-    figure = Calendarr(df.groupby('from').mean().reset_index(), maxx, i)
+    figure = Calendarr(df.groupby('from').sum().reset_index(), maxx, i)
     st_pyecharts(figure, height='400px', key='hejsa'+str(i))
 
 
