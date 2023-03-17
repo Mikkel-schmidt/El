@@ -183,6 +183,7 @@ uge = ugeprofil(df_opti)
 uge2 = ugeprofil(df_norm)
 
 st.write(dagsprofil(df_norm))
+st.write(uge2)
 
 #st.write(ug)
 #st.write(ug2)
@@ -193,6 +194,39 @@ st.write('Årlig forbrug på ' + str(ugg['amount_now'].sum()*52) + ' kWh')
 st.write('Mulig besparelse på ' + str((ugg['besparelse_kwh'].sum()*52)/(ugg['amount_now'].sum()*52)*100) + '%')
 
 
+
+@st.cache_resource
+def liness(df, df2):
+    b1 = (
+        Line()
+        .add_xaxis(list(df['x-axis']))
+        .add_yaxis('Timeforbrug', list(df['amount']), symbol='emptyCircle', symbol_size=0, label_opts=opts.LabelOpts(is_show=False,formatter="{b}: {c}"), #areastyle_opts=opts.AreaStyleOpts(opacity=0.5,),# color="#546a67"),
+        linestyle_opts=opts.LineStyleOpts(width=1), 
+        )
+        .add_yaxis('Optimeret', list(df2['amount']), symbol='emptyCircle', symbol_size=1, label_opts=opts.LabelOpts(is_show=False,formatter="{b}: {c}"), #areastyle_opts=opts.AreaStyleOpts(opacity=0.5,),# color="#546a67"),
+        linestyle_opts=opts.LineStyleOpts(width=1), 
+        )
+        .set_global_opts(
+            legend_opts=opts.LegendOpts(orient='horizontal', pos_left="center", is_show=True),
+            title_opts=opts.TitleOpts(),
+            toolbox_opts=opts.ToolboxOpts(orient='vertical', is_show=False),
+            yaxis_opts=opts.AxisOpts(
+                name='Forbrug [kWh]',
+                type_="value",
+                axistick_opts=opts.AxisTickOpts(is_show=True),
+                splitline_opts=opts.SplitLineOpts(is_show=True)),
+            xaxis_opts=opts.AxisOpts(name='Tid'),
+            datazoom_opts=[
+                opts.DataZoomOpts(range_start=0, range_end=100),
+                opts.DataZoomOpts(type_="inside", range_start=0, range_end=100),
+            ],
+            )
+    )
+    return b1
+
+with col1:
+    figur = liness(uge2, uge)
+    st_pyecharts(figur, height='400px')
 
 @st.cache_resource
 def liness(df, df2):
