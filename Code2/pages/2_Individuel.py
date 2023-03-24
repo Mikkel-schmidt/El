@@ -239,11 +239,11 @@ def liness(df):
         .add_yaxis('Torsdag', list(df[df['day']=='Torsdag']['amount_mean']), symbol='emptyCircle', symbol_size=0, label_opts=opts.LabelOpts(is_show=False,formatter="{b}: {c}"), color="#a1d9cc",#areastyle_opts=opts.AreaStyleOpts(opacity=0.5,),# color="#546a67"),
         linestyle_opts=opts.LineStyleOpts(width=1), )
         .add_yaxis('Fredag', list(df[df['day']=='Fredag']['amount_mean']), symbol='emptyCircle', symbol_size=0, label_opts=opts.LabelOpts(is_show=False,formatter="{b}: {c}"), color="#1e8c82",#areastyle_opts=opts.AreaStyleOpts(opacity=0.5,),# color="#546a67"),
-        linestyle_opts=opts.LineStyleOpts(width=1), )
+        linestyle_opts=opts.LineStyleOpts(width=1.5), )
         .add_yaxis('Lørdag', list(df[df['day']=='Lørdag']['amount_mean']), symbol='emptyCircle', symbol_size=0, label_opts=opts.LabelOpts(is_show=False,formatter="{b}: {c}"), color="#006e64",#areastyle_opts=opts.AreaStyleOpts(opacity=0.5,),# color="#546a67"),
-        linestyle_opts=opts.LineStyleOpts(width=1), )
+        linestyle_opts=opts.LineStyleOpts(width=1.5), )
         .add_yaxis('Søndag', list(df[df['day']=='Søndag']['amount_mean']), symbol='emptyCircle', symbol_size=0, label_opts=opts.LabelOpts(is_show=False,formatter="{b}: {c}"), color="#004e4a", #areastyle_opts=opts.AreaStyleOpts(opacity=0.5,),# color="#546a67"),
-        linestyle_opts=opts.LineStyleOpts(width=1), )
+        linestyle_opts=opts.LineStyleOpts(width=1.5), )
         .set_global_opts(
             legend_opts=opts.LegendOpts( pos_left="center", is_show=True),
             title_opts=opts.TitleOpts(),
