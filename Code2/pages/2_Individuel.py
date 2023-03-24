@@ -245,7 +245,7 @@ def liness(df):
         .add_yaxis('Søndag', list(df[df['day']=='Søndag']['amount_mean']), symbol='emptyCircle', symbol_size=0, label_opts=opts.LabelOpts(is_show=False,formatter="{b}: {c}"), color="#734848", #areastyle_opts=opts.AreaStyleOpts(opacity=0.5,),# color="#546a67"),
         linestyle_opts=opts.LineStyleOpts(width=1), )
         .set_global_opts(
-            legend_opts=opts.LegendOpts(orient='horizontal', pos_left="center", is_show=True),
+            legend_opts=opts.LegendOpts( pos_left="center", is_show=True),
             title_opts=opts.TitleOpts(),
             toolbox_opts=opts.ToolboxOpts(orient='vertical', is_show=False),
             yaxis_opts=opts.AxisOpts(
