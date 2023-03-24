@@ -240,9 +240,9 @@ def liness(df):
         linestyle_opts=opts.LineStyleOpts(width=1), )
         .add_yaxis('Fredag', list(df[df['day']=='Fredag']['amount_mean']), symbol='emptyCircle', symbol_size=0, label_opts=opts.LabelOpts(is_show=False,formatter="{b}: {c}"), color="#c8f0e6",#areastyle_opts=opts.AreaStyleOpts(opacity=0.5,),# color="#546a67"),
         linestyle_opts=opts.LineStyleOpts(width=1), )
-        .add_yaxis('Lørdag', list(df[df['day']=='Lørdag']['amount_mean']), symbol='emptyCircle', symbol_size=0, label_opts=opts.LabelOpts(is_show=False,formatter="{b}: {c}"), color="#dcfae9",#areastyle_opts=opts.AreaStyleOpts(opacity=0.5,),# color="#546a67"),
+        .add_yaxis('Lørdag', list(df[df['day']=='Lørdag']['amount_mean']), symbol='emptyCircle', symbol_size=0, label_opts=opts.LabelOpts(is_show=False,formatter="{b}: {c}"), color="#c17150",#areastyle_opts=opts.AreaStyleOpts(opacity=0.5,),# color="#546a67"),
         linestyle_opts=opts.LineStyleOpts(width=1), )
-        .add_yaxis('Søndag', list(df[df['day']=='Søndag']['amount_mean']), symbol='emptyCircle', symbol_size=0, label_opts=opts.LabelOpts(is_show=False,formatter="{b}: {c}"), color="#52d6a3", #areastyle_opts=opts.AreaStyleOpts(opacity=0.5,),# color="#546a67"),
+        .add_yaxis('Søndag', list(df[df['day']=='Søndag']['amount_mean']), symbol='emptyCircle', symbol_size=0, label_opts=opts.LabelOpts(is_show=False,formatter="{b}: {c}"), color="#734848", #areastyle_opts=opts.AreaStyleOpts(opacity=0.5,),# color="#546a67"),
         linestyle_opts=opts.LineStyleOpts(width=1), )
         .set_global_opts(
             legend_opts=opts.LegendOpts(orient='horizontal', pos_left="center", is_show=True),
