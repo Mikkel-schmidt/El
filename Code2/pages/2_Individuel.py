@@ -195,10 +195,10 @@ def liness(df, df2):
         Line()
         .add_xaxis(list(df['x-axis']))
         .add_yaxis('Timeforbrug', list(df['amount_mean']), symbol='emptyCircle', symbol_size=0, label_opts=opts.LabelOpts(is_show=False,formatter="{b}: {c}"), #areastyle_opts=opts.AreaStyleOpts(opacity=0.5,),# color="#546a67"),
-        linestyle_opts=opts.LineStyleOpts(width=1), 
+        linestyle_opts=opts.LineStyleOpts(width=2), 
         )
         .add_yaxis('Optimeret', list(df2['amount_mean']), symbol='emptyCircle', symbol_size=1, label_opts=opts.LabelOpts(is_show=False,formatter="{b}: {c}"), #areastyle_opts=opts.AreaStyleOpts(opacity=0.5,),# color="#546a67"),
-        linestyle_opts=opts.LineStyleOpts(width=1), 
+        linestyle_opts=opts.LineStyleOpts(width=2), 
         )
         .set_global_opts(
             legend_opts=opts.LegendOpts(orient='horizontal', pos_left="center", is_show=True),
