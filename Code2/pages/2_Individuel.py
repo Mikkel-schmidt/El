@@ -428,8 +428,8 @@ col1.markdown("""I den nedenstående grafik kan man se hvordan forbruget fordele
 """)
 
 
-maxx = df.groupby(df['from'].dt.day).mean()['amount'].max()
-minn = df.groupby(df['from'].dt.day).mean()['amount'].min()
+maxx = df.groupby(df['from'].dt.day).sum()['amount'].max()
+minn = df.groupby(df['from'].dt.day).sum()['amount'].min()
 aar = col2.multiselect('Vælg år', df['from'].dt.year.unique(), default=2022)
 
  
