@@ -117,7 +117,7 @@ def heatmapp(df):
             inplace=True,)
     pivot.sort_values('day', ascending=False, inplace=True)
     pivot.drop('day', axis=1)
-    #pivot = pivot.reindex(sorted(pivot.columns), axis=1)
+    pivot = pivot.sort_index(axis=1, inplace=True)
     st.write(pivot)
     x_axis = pivot.columns[:-1].tolist()
     y_axis = pivot.index.tolist()
