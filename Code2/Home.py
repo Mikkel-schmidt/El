@@ -22,7 +22,7 @@ import locale
 #for lang in locale.windows_locale.values():
 #    st.write(lang)
 
-locale.setlocale(locale.LC_ALL, "da_DK")
+locale.setlocale(locale.LC_ALL, "da_DK") 
 
 
 
