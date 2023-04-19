@@ -151,7 +151,7 @@ else:
 df_norm = df[df['bkps']==df['bkps'].iloc[-1]].groupby('from').agg({'meter': 'mean', 'amount': 'sum', 'day-moment': 'first'}).reset_index()
 
 with col1:
-    figure = heatmapp(df.iloc[-2160:])
+    figure = heatmapp(df.iloc[-2159:])
     st_pyecharts(figure, height='400px', key='hej')
 
 @st.cache_data
