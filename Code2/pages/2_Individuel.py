@@ -104,7 +104,6 @@ with col2:
 @st.cache_resource
 def heatmapp(df):
     pivot = df.pivot_table(index=df['from'].dt.day_name(locale='da_DK'), columns=df['from'].dt.hour, aggfunc='mean', values='amount', sort=False)
-    
     pivot['day'] = pivot.index
     pivot['day'].replace({
             "Mandag": 0,
@@ -117,8 +116,7 @@ def heatmapp(df):
             inplace=True,)
     pivot.sort_values('day', ascending=False, inplace=True)
     pivot.drop('day', axis=1)
-    #pivot = pivot.sort_index(axis=1)
-    st.write(pivot)
+
     x_axis = pivot.columns[:-1].tolist()
     y_axis = pivot.index.tolist()
     data = [[i, j, pivot.iloc[j,i].round(1)] for i in range(24) for j in range(7)]
@@ -153,7 +151,7 @@ else:
 df_norm = df[df['bkps']==df['bkps'].iloc[-1]].groupby('from').agg({'meter': 'mean', 'amount': 'sum', 'day-moment': 'first'}).reset_index()
 
 with col1:
-    figure = heatmapp(df_norm)
+    figure = heatmapp(df.iloc[-2160:])
     st_pyecharts(figure, height='400px', key='hej')
 
 @st.cache_data
