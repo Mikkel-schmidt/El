@@ -143,8 +143,15 @@ col2.markdown("""I figuren til venstre kan man se hvordan forbruget fordeler sig
 Her burde man kunne se hvordan åbningstiderne i bygningen er og om bygningen lukkes ned udenfor åbningstid""")
 col2.markdown('Tallet i midten er det gennemsnitlige forbrug i den time på den ugedag.')
 
+if df['bkps'].iloc[-1] >= df['bkps'].max():
+    df_opti = df[df['bkps']==df['bkps'].iloc[-1]].groupby('from').agg({'meter': 'mean', 'amount': 'sum', 'day-moment': 'first'}).reset_index()
+else:
+    df_opti = df[df['bkps']==df['bkps'].min()].groupby('from').agg({'meter': 'mean', 'amount': 'sum', 'day-moment': 'first'}).reset_index()
+
+df_norm = df[df['bkps']==df['bkps'].iloc[-1]].groupby('from').agg({'meter': 'mean', 'amount': 'sum', 'day-moment': 'first'}).reset_index()
+
 with col1:
-    figure = heatmapp(df)
+    figure = heatmapp(df_norm)
     st_pyecharts(figure, height='400px', key='hej')
 
 @st.cache_data
@@ -167,12 +174,7 @@ def ugeprofil(df):
     dff['x-axis'] = dff.apply(lambda row: row['day'] + ' kl. ' + str(row['hour']), axis=1)
     return dff
 
-if df['bkps'].iloc[-1] >= df['bkps'].max():
-    df_opti = df[df['bkps']==df['bkps'].iloc[-1]].groupby('from').agg({'meter': 'mean', 'amount': 'sum', 'day-moment': 'first'}).reset_index()
-else:
-    df_opti = df[df['bkps']==df['bkps'].min()].groupby('from').agg({'meter': 'mean', 'amount': 'sum', 'day-moment': 'first'}).reset_index()
 
-df_norm = df[df['bkps']==df['bkps'].iloc[-1]].groupby('from').agg({'meter': 'mean', 'amount': 'sum', 'day-moment': 'first'}).reset_index()
 
 uge = ugeprofil(df_opti)
 uge2 = ugeprofil(df_norm)
