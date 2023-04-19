@@ -428,8 +428,8 @@ col1.markdown("""I den nedenstående grafik kan man se hvordan forbruget fordele
 """)
 
 
-maxx = df.groupby(df['from'].dt.day).sum()['amount'].max()
-minn = df.groupby(df['from'].dt.day).sum()['amount'].min()
+maxx = df.groupby(df['from'].dt.date).sum()['amount'].max()
+minn = df.groupby(df['from'].dt.date).sum()['amount'].min()
 aar = col2.multiselect('Vælg år', df['from'].dt.year.unique(), default=2022)
 
  
@@ -464,7 +464,7 @@ def Calendarr(df, maxx, aar):
 #st.write(df)
 #st.write(df.groupby('from').sum().reset_index())
 for i in aar:
-    figure = Calendarr(df.groupby(df['from'].dt.day).sum()['amount'].reset_index(), maxx, i)
+    figure = Calendarr(df.groupby(df['from'].dt.date).sum()['amount'].reset_index(), maxx, i)
     st_pyecharts(figure, height='400px', key='hejsa'+str(i))
 
 
