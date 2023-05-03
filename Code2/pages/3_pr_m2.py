@@ -138,7 +138,13 @@ with col2:
 st.markdown('---')
 c = st.container()
 df_besp['drift nøgle'] = df_besp['besparelse'] / df_besp['areal']
-c.write(df_besp[['Adresse', 'årligt forbrug', 'areal', 'nøgletal', 'besparelse', 'drift nøgle', 'anvendelseskode']].sort_values('nøgletal', ascending=False))
+
+if df_g:
+    df_bespp = df_besp.merge(df_g['Adresse', 'standby besparelse'], on='Adresse')
+    df_bespp['standby nøgle'] = df_bespp['standby besparelse']/df_bespp['areal']
+    c.write(df_besp[['Adresse', 'årligt forbrug', 'areal', 'nøgletal', 'besparelse', 'drift nøgle', 'anvendelseskode', 'standby besparelse', 'standby nøgle']].sort_values('nøgletal', ascending=False))
+else:
+    c.write(df_besp[['Adresse', 'årligt forbrug', 'areal', 'nøgletal', 'besparelse', 'drift nøgle', 'anvendelseskode']].sort_values('nøgletal', ascending=False))
 
 
 
