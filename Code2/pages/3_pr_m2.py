@@ -158,7 +158,7 @@ def standby_df(df):
 
     return df_g
 
-df_g = standby_df(df)
+
 
 c = st.container()
 df_besp['drift nøgle'] = df_besp['besparelse'] / df_besp['areal']
@@ -174,7 +174,7 @@ def get_day_moment(hour) -> str:
 
 df['day-moment'] = df.apply(lambda row: get_day_moment(hour = row['from'].hour), axis=1)
 
-
+df_g = standby_df(df)
 df_bespp = df_besp.merge(df_g['Adresse', 'standby besparelse'], on='Adresse')
 df_bespp['standby nøgle'] = df_bespp['standby besparelse']/df_bespp['areal']
 c.write(df_besp[['Adresse', 'årligt forbrug', 'areal', 'nøgletal', 'besparelse', 'drift nøgle', 'anvendelseskode', 'standby besparelse', 'standby nøgle']].sort_values('nøgletal', ascending=False))
