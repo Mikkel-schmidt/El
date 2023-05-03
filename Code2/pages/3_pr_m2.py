@@ -138,7 +138,7 @@ with col2:
 st.markdown('---')
 c = st.container()
 df_besp['drift nøgle'] = df_besp['besparelse'] / df_besp['areal']
-c.write(df_besp[['Adresse', 'årligt forbrug', 'areal', 'nøgletal', 'besparelse', 'drift nøgle']].sort_values('nøgletal', ascending=False))
+c.write(df_besp[['Adresse', 'årligt forbrug', 'areal', 'nøgletal', 'besparelse', 'drift nøgle', 'anvendelseskode']].sort_values('nøgletal', ascending=False))
 
 
 
