@@ -175,7 +175,7 @@ df['day-moment'] = df.apply(lambda row: get_day_moment(hour = row['from'].hour),
 
 df_g = standby_df(df)
 df_g['standby besparelse'] = df_g['Standby forbrug']-((df_g['Standby forbrug']/df_g['Standby Total [%]'])*30)
-#df_g['standby besparelse'] = df_g['standby besparelse'].clip(lower=0, inplace=True)
+df_g['standby besparelse'] = df_g['standby besparelse'].clip(lower=0)
 c.write(df_g)
 df_bespp = df_besp.merge(df_g[['Adresse', 'standby besparelse']], on='Adresse')
 df_bespp['standby nøgle'] = df_bespp['standby besparelse']/df_bespp['areal']
