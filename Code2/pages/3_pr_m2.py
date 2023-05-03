@@ -163,14 +163,6 @@ df_g = standby_df(df)
 c = st.container()
 df_besp['drift nøgle'] = df_besp['besparelse'] / df_besp['areal']
 
-
-df_bespp = df_besp.merge(df_g['Adresse', 'standby besparelse'], on='Adresse')
-df_bespp['standby nøgle'] = df_bespp['standby besparelse']/df_bespp['areal']
-c.write(df_besp[['Adresse', 'årligt forbrug', 'areal', 'nøgletal', 'besparelse', 'drift nøgle', 'anvendelseskode', 'standby besparelse', 'standby nøgle']].sort_values('nøgletal', ascending=False))
-
-
-
-
 st.markdown('---')
 col1, col2 = st.columns([2,2])
 abn, luk = col2.slider('Vælg bygningens åbningstider', min_value=1, max_value=24, value=(6, 18))
@@ -181,6 +173,16 @@ def get_day_moment(hour) -> str:
     return 'Standby forbrug'
 
 df['day-moment'] = df.apply(lambda row: get_day_moment(hour = row['from'].hour), axis=1)
+
+
+df_bespp = df_besp.merge(df_g['Adresse', 'standby besparelse'], on='Adresse')
+df_bespp['standby nøgle'] = df_bespp['standby besparelse']/df_bespp['areal']
+c.write(df_besp[['Adresse', 'årligt forbrug', 'areal', 'nøgletal', 'besparelse', 'drift nøgle', 'anvendelseskode', 'standby besparelse', 'standby nøgle']].sort_values('nøgletal', ascending=False))
+
+
+
+
+
 
 @st.cache_resource
 def piee(df):
