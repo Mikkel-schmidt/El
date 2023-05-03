@@ -130,7 +130,7 @@ def barr(df, grader):
         .set_series_opts()
     )
     return b1
-
+ 
 with col2:
     figur = barr(df_besp, 90)
     st_pyecharts(figur, height='500px')
