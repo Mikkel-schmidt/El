@@ -256,7 +256,7 @@ def standby_df(df):
     df_g['Standby Total [%]'] = df_g['Standby forbrug']/(df_g['Standby forbrug']+df_g['Dagsforbrug'])*100
 
     df_g['standby besp'] = df_g['Standby forbrug']-((df_g['Standby forbrug']/df_g['Standby Total [%]'])*30)
-    df_g['standby besp'] = df_g['standby besp'].clip(lower=0)
+    df_g['standby besp'] = df_g['standby besp'].clip(lower=0, inplace=True)
 
     return df_g
 st.write(df.head(60))
