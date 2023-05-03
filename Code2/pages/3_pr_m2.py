@@ -175,10 +175,10 @@ def get_day_moment(hour) -> str:
 df['day-moment'] = df.apply(lambda row: get_day_moment(hour = row['from'].hour), axis=1)
 
 df_g = standby_df(df)
-c.write(df_g)
+#c.write(df_g)
 df_bespp = df_besp.merge(df_g[['Adresse', 'standby besp']], on='Adresse')
 df_bespp['standby nøgle'] = df_bespp['standby besp']/df_bespp['areal']
-c.write(df_besp[['Adresse', 'årligt forbrug', 'areal', 'nøgletal', 'besparelse', 'drift nøgle', 'anvendelseskode', 'standby besp', 'standby nøgle']].sort_values('nøgletal', ascending=False))
+c.write(df_bespp[['Adresse', 'årligt forbrug', 'areal', 'nøgletal', 'besparelse', 'drift nøgle', 'anvendelseskode', 'standby besp', 'standby nøgle']].sort_values('nøgletal', ascending=False))
 
 
 
