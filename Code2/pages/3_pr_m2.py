@@ -132,7 +132,7 @@ def barr(df, grader):
     return b1
 
 with col2:
-    figur = barr(df_besp, 90)
+    figur = barr(df_besp.sort_values('nøgletal', ascending=False), 90)
     st_pyecharts(figur, height='500px')
 
 st.markdown('---')
