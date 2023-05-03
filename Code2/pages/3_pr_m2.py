@@ -142,11 +142,11 @@ def standby_df(df):
     df_g = df.groupby(['Adresse', 'day-moment']).agg({'amount': 'sum', 'from': 'count'}).reset_index()
     df_g['time gns'] = df_g.apply(lambda row: row['amount']/row['from'], axis=1)
     df_h = df_g.pivot( index='Adresse', columns=['day-moment'], values='time gns').reset_index()
-    st.write(df_h)
+    #st.write(df_h)
     df_h = df_h.rename(columns={'Dagsforbrug': 'Time gns. dag', 'Standby forbrug': 'Time gns. standby'})
 
     df_g = df_g.pivot( index='Adresse', columns=['day-moment'], values='amount').reset_index()
-    st.write(df_g)
+    #st.write(df_g)
     df_g['Totalt forbrug'] = df_g['Standby forbrug']+df_g['Dagsforbrug']
     df_g = df_g.merge(df_h, on='Adresse')
 
