@@ -136,6 +136,13 @@ with col2:
     st_pyecharts(figur, height='500px')
 
 st.markdown('---')
+c = st.container()
+df_besp['drift nøgle'] = df_besp['besparelse'] / df_besp['areal']
+col1.write(df_besp[['Adresse', 'årligt forbrug', 'areal', 'nøgletal', 'drift nøgle']].sort_values('nøgletal', ascending=False))
+
+
+
+st.markdown('---')
 col1, col2 = st.columns([2,2])
 abn, luk = col2.slider('Vælg bygningens åbningstider', min_value=1, max_value=24, value=(6, 18))
 
