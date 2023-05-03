@@ -248,7 +248,7 @@ def standby_df(df):
     df_h = df_h.rename(columns={'Dagsforbrug': 'Time gns. dag', 'Standby forbrug': 'Time gns. standby'})
 
     df_g = df_g.pivot( index='Adresse', columns=['day-moment'], values='amount').reset_index()
-
+    st.write(df_g)
     df_g['Totalt forbrug'] = df_g['Standby forbrug']+df_g['Dagsforbrug']
     df_g = df_g.merge(df_h, on='Adresse')
 
