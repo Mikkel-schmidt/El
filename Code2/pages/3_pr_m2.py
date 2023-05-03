@@ -253,8 +253,10 @@ def standby_df(df):
 
     df_g['Standby Vægtet [%]'] = df_g['Standby forbrug']/df_g['Dagsforbrug']*100
     df_g['Standby Total [%]'] = df_g['Standby forbrug']/(df_g['Standby forbrug']+df_g['Dagsforbrug'])*100
-    return df_g
 
+
+    return df_g
+st.write(df.head(60))
 df_g = standby_df(df)
 if 'df_g' not in st.session_state:
         st.session_state['df_g'] = df_g.sort_values(by='Standby Total [%]', ascending=False) 
