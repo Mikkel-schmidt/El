@@ -114,7 +114,7 @@ col1.write(df_besp[['Adresse', 'årligt forbrug', 'areal', 'nøgletal', 'anvende
 
 @st.cache_resource
 def barr(df, grader):
-    df = df.sort_values('årligt forbrug')
+    df = df.sort_values('nøgletal')
     b1 = (
         Bar()
         .add_xaxis(list(df['Adresse']))
@@ -132,7 +132,7 @@ def barr(df, grader):
     return b1
 
 with col2:
-    figur = barr(df_besp.sort_values('nøgletal', ascending=False), 90)
+    figur = barr(df_besp, 90)
     st_pyecharts(figur, height='500px')
 
 st.markdown('---')
