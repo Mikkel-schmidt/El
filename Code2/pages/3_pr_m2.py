@@ -174,12 +174,12 @@ def get_day_moment(hour) -> str:
 df['day-moment'] = df.apply(lambda row: get_day_moment(hour = row['from'].hour), axis=1)
 
 df_g = standby_df(df)
-df_g['standby besp'] = df_g['Standby forbrug']-((df_g['Standby forbrug']/df_g['Standby Total [%]'])*30)
-df_g['standby besp'] = df_g['standby besp'].clip(lower=0, inplace=True)
+df_g['standby besparelse'] = df_g['Standby forbrug']-((df_g['Standby forbrug']/df_g['Standby Total [%]'])*30)
+#df_g['standby besparelse'] = df_g['standby besparelse'].clip(lower=0, inplace=True)
 c.write(df_g)
-df_bespp = df_besp.merge(df_g[['Adresse', 'standby besp']], on='Adresse')
-df_bespp['standby nøgle'] = df_bespp['standby besp']/df_bespp['areal']
-c.write(df_bespp[['Adresse', 'årligt forbrug', 'areal', 'nøgletal', 'besparelse', 'drift nøgle', 'anvendelseskode', 'standby besp', 'standby nøgle']].sort_values('nøgletal', ascending=False))
+df_bespp = df_besp.merge(df_g[['Adresse', 'standby besparelse']], on='Adresse')
+df_bespp['standby nøgle'] = df_bespp['standby besparelse']/df_bespp['areal']
+c.write(df_bespp[['Adresse', 'årligt forbrug', 'areal', 'nøgletal', 'besparelse', 'drift nøgle', 'anvendelseskode', 'standby besparelse', 'standby nøgle']].sort_values('nøgletal', ascending=False))
 
 
 
