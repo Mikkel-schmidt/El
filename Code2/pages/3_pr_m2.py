@@ -118,7 +118,7 @@ def barr(df, grader):
     b1 = (
         Bar()
         .add_xaxis(list(df['Adresse']))
-        .add_yaxis('Samlet forbrug', list(df['årligt forbrug']), label_opts=opts.LabelOpts(is_show=False, formatter="{b}: {c}"),)
+        .add_yaxis('Samlet forbrug', list(df['nøgletal']), label_opts=opts.LabelOpts(is_show=False, formatter="{b}: {c}"),)
         .reversal_axis()
         .set_global_opts(
             datazoom_opts=[opts.DataZoomOpts(type_="inside", orient="vertical"), opts.DataZoomOpts(type_="slider", orient="vertical")], 
