@@ -179,7 +179,8 @@ df_g['standby besparelse'] = df_g['standby besparelse'].clip(lower=0)
 c.write(df_g)
 df_bespp = df_besp.merge(df_g[['Adresse', 'standby besparelse']], on='Adresse')
 df_bespp['standby nøgle'] = df_bespp['standby besparelse']/df_bespp['areal']
-c.write(df_bespp[['Adresse', 'årligt forbrug', 'areal', 'nøgletal', 'besparelse', 'drift nøgle', 'anvendelseskode', 'standby besparelse', 'standby nøgle']].sort_values('nøgletal', ascending=False))
+df_bespp['samlet'] = df_bespp['drift nøgle'] * df_bespp['standby nøgle']
+c.write(df_bespp[['Adresse', 'årligt forbrug', 'areal', 'nøgletal', 'besparelse', 'drift nøgle', 'anvendelseskode', 'standby besparelse', 'standby nøgle', 'samlet']].sort_values('samlet', ascending=False))
 
 
 
