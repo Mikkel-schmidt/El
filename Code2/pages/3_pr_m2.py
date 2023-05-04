@@ -55,7 +55,7 @@ df_besp = df_besp.sort_values(by='%', ascending=False)
 
 col1, col2 = st.columns([3,2])
 with col1:
-    st.dataframe(df_besp[['Adresse', 'besparelse', 'årligt forbrug', 'mean', '%']])
+    st.dataframe(df_besp[['Adresse', 'besparelse', 'årligt forbrug', 'mean', '%']].style.background_gradient(cmap='Blues').set_precision(1))
 
 with col2:
     adr = st.selectbox('Select', df_besp['Adresse'].unique())
@@ -180,7 +180,7 @@ c.write(df_g)
 df_bespp = df_besp.merge(df_g[['Adresse', 'standby besparelse']], on='Adresse')
 df_bespp['standby nøgle'] = df_bespp['standby besparelse']/df_bespp['areal']
 df_bespp['samlet'] = df_bespp['drift nøgle'] * df_bespp['standby nøgle']
-c.write(df_bespp[['Adresse', 'årligt forbrug', 'areal', 'nøgletal', 'besparelse', 'drift nøgle', 'anvendelseskode', 'standby besparelse', 'standby nøgle', 'samlet']].sort_values('samlet', ascending=False))
+c.write(df_bespp[['Adresse', 'årligt forbrug', 'areal', 'nøgletal', 'besparelse', 'drift nøgle', 'anvendelseskode', 'standby besparelse', 'standby nøgle', 'samlet']].sort_values('samlet', ascending=False).style.background_gradient(cmap='Blues').set_precision(1))
 
 
 
