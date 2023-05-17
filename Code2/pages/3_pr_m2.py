@@ -115,6 +115,7 @@ col1.write(df_besp[['Adresse', 'årligt forbrug', 'areal', 'nøgletal', 'anvende
 @st.cache_resource
 def barr(df, grader):
     df = df.sort_values('nøgletal')
+    grid = Grid()
     b1 = (
         Bar()
         .add_xaxis(list(df['Adresse']))
@@ -129,7 +130,8 @@ def barr(df, grader):
         )
         .set_series_opts()
     )
-    return b1
+    grid.add(b1, grid_bottom="25%")
+    return grid
  
 with col2:
     figur = barr(df_besp, 90)
