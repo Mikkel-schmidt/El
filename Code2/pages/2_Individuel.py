@@ -415,6 +415,9 @@ with col1:
     figur = piee(df)
     st_pyecharts(figur, height='400px')
 
+figur = piee(df)
+st_pyecharts(figur, height='400px')
+
 with col2:
     figur = bars(df.groupby('day-moment').sum()['amount'].reset_index(), 90)
     st_pyecharts(figur, height='400px')
