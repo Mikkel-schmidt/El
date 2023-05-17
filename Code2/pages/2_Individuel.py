@@ -411,9 +411,9 @@ def bars(df, grader):
 
 col1, col2 = st.columns([2,3])
 
-with col1:
-    figur = piee(df)
-    st_pyecharts(figur, height='400px')
+# with col1:
+#     figur = piee(df)
+#     st_pyecharts(figur, height='400px')
 
 figur = piee(df)
 st_pyecharts(figur, height='400px')
