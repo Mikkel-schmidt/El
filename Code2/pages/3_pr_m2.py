@@ -124,6 +124,7 @@ def barr(df, grader):
             datazoom_opts=[opts.DataZoomOpts(type_="inside", orient="vertical"), opts.DataZoomOpts(type_="slider", orient="vertical")], 
             legend_opts=opts.LegendOpts(orient='vertical', pos_left="left", is_show=True),
             xaxis_opts=opts.AxisOpts(axislabel_opts=opts.LabelOpts(rotate=grader), name='Intensitet [kWh/m2]'),
+            yaxis_opts=opts.AxisOpts(offset=80,),
             title_opts=opts.TitleOpts(title='Samlet forbrug', pos_left="center"),
             toolbox_opts=opts.ToolboxOpts(orient='vertical', is_show=False),
         )
