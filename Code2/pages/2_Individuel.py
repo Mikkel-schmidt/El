@@ -101,7 +101,7 @@ with col2:
     figur = linesss(df.groupby('from').agg({'meter': 'mean', 'amount': 'sum', 'bkps': 'sum'}).reset_index())
     st_pyecharts(figur, height='600px')
 
-@st.cache_resource
+#@st.cache_resource
 def heatmapp(df):
     pivot = df.pivot_table(index=df['from'].dt.day_name(locale='da_DK'), columns=df['from'].dt.hour, aggfunc='mean', values='amount', sort=False)
     pivot['day'] = pivot.index
@@ -154,7 +154,7 @@ with col1:
     figure = heatmapp(df.iloc[-2159:])
     st_pyecharts(figure, height='400px', key='hej')
 
-@st.cache_data
+#@st.cache_data
 def ugeprofil(df):
     dff = df.groupby([df['from'].dt.day_name(locale='da_DK'), df['from'].dt.hour]).agg({'amount': ['mean', 'std']}).reset_index(names=['day', 'hour'])
     dff.columns = ['_'.join(tup).rstrip('_') for tup in dff.columns.values]
@@ -227,7 +227,7 @@ with col1:
 #st.write(list(uge2['hour'].unique()))
 #st.write(list(uge2[uge2['day']=='Mandag']['amount_mean']))
 
-@st.cache_resource
+#@st.cache_resource
 def liness(df):
     b1 = (
         Line()
@@ -277,7 +277,7 @@ col1.markdown("""Nedenunder kan man se hvor meget af forbruget der ligger udenfo
 I figuren til venstre kan man se hvor meget af det totale forbrug ligger i og udenfor åbningstid. I figuren til højre er det gennemsnitlige timeforbrug. """)
 col1.markdown('Den inderste cirkel i figuren til venstre viser bygningsmassens fordeling til sammenligning.')
 
-@st.cache_resource
+#@st.cache_resource
 def piee(df):
     hej = df.groupby('day-moment').sum()['amount'].reset_index()
     data = [list(z) for z in zip(hej['day-moment'], hej['amount'])]
