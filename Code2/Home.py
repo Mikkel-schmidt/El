@@ -45,7 +45,7 @@ if check_password():
 
     c = col1.container()
 
-    kunder = ['FitnessWorld', 'BallerupKommune', 'Privat_elforbrug_test', 'Syntese', 'DanskeBank', 'Siemens Gamesa', 'NykreditMaegler', 'Bahne', 'Horsens Kommune', 'G4S', 'VinkPlast', 'MilestoneSystems', 'Premier Is']
+    kunder = ['FitnessWorld', 'BallerupKommune', 'BallerupKommune1', 'Privat_elforbrug_test', 'Syntese', 'DanskeBank', 'Siemens Gamesa', 'NykreditMaegler', 'Bahne', 'Horsens Kommune', 'G4S', 'VinkPlast', 'MilestoneSystems', 'Premier Is']
     if 'kunde' not in st.session_state:
         valgt = col2.multiselect('Vælg kunde (må kun være en kunde)', kunder, max_selections=1)
         st.session_state['kunde'] = valgt
