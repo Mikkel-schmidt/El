@@ -129,9 +129,9 @@ def barr(df, grader):
         )
         .set_series_opts()
     )
-    grid = Grid()
-    grid.add(b1, grid_left="60%")
-    grid.render()
+    grid =  (Grid()
+            .add(b1, grid_left="60%"))
+    #grid.render()
     return grid
  
 with col2:
