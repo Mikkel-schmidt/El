@@ -129,14 +129,12 @@ def barr(df, grader):
         )
         .set_series_opts()
     )
-    chart = Grid(width=1100, height=600)
-    chart.add(b1, grid_left='20%')
-    #page.add(chart)
-    return chart
+    
+    return b1
  
 with col2:
     figur = barr(df_besp, 90)
-    st_pyecharts(figur, height='500px')
+    st_pyecharts(figur, height='500px', width='400px')
 
 st.markdown('---')
 
