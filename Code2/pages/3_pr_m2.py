@@ -124,7 +124,7 @@ def barr(df, grader):
             datazoom_opts=[opts.DataZoomOpts(type_="inside", orient="vertical"), opts.DataZoomOpts(type_="slider", orient="vertical")], 
             legend_opts=opts.LegendOpts(orient='vertical', pos_left="left", is_show=True),
             xaxis_opts=opts.AxisOpts(axislabel_opts=opts.LabelOpts(rotate=grader), name='Intensitet [kWh/m2]'),
-            yaxis_opts=opts.AxisOpts(offset=-80,),
+            yaxis_opts=opts.AxisOpts(axislabel_opts=opts.LabelOpts(rotate=30)),
             title_opts=opts.TitleOpts(title='Samlet forbrug', pos_left="center"),
             toolbox_opts=opts.ToolboxOpts(orient='vertical', is_show=False),
         )
@@ -134,7 +134,7 @@ def barr(df, grader):
     return b1
  
 with col2:
-    figur = barr(df_besp, 90)
+    figur = barr(df_besp, 30)
     
 st_pyecharts(figur, height='500px')#, width='400px')
 
