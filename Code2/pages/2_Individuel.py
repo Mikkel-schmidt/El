@@ -283,53 +283,53 @@ def piee(df):
     data = [list(z) for z in zip(hej['day-moment'], hej['amount'])]
     #st.write(data)
     # if not st.session_state['df_over_standby']:
-        p = (
-            Pie()
-            .add(
-                series_name='Forbrug i perioder',
-                data_pair=data,
-                #rosetype="area",
-                radius=["40%", "70%"],
-                #center=["85%", "50%"],
-                label_opts=opts.LabelOpts(position="outside",
-                formatter="{a|{a}}{abg|}\n{hr|}\n {b|{b}: }{c} kWh\n {per|{d}%}  ",
-                background_color="#eee",
-                border_color="#aaa",
-                border_width=1,
-                border_radius=4,
-                rich={
-                    "a": {"color": "#999", "lineHeight": 22, "align": "center"},
-                    "abg": {
-                        "backgroundColor": "#e3e3e3",
-                        "width": "100%",
-                        "align": "right",
-                        "height": 22,
-                        "borderRadius": [4, 4, 0, 0],
-                    },
-                    "hr": {
-                        "borderColor": "#aaa",
-                        "width": "100%",
-                        "borderWidth": 0.5,
-                        "height": 0,
-                    },
-                    "b": {"fontSize": 12, "lineHeight": 33},
-                    "per": {
-                        "color": "#eee",
-                        "backgroundColor": "#334455",
-                        "padding": [2, 4],
-                        "borderRadius": 2,
-                    },
-                },),
-                #itemstyle_opts=opts.ItemStyleOpts(color=JsCode(color_function)    )
-            )
-            .set_global_opts(
-                legend_opts=opts.LegendOpts(orient='vertical', pos_left="right", type_='scroll', is_show=True),
-                title_opts=opts.TitleOpts(
-                    title='Forbrug i perioder', pos_left="center"
-                ),
-                toolbox_opts=opts.ToolboxOpts(orient='vertical', is_show=False),
-            )
+    p = (
+        Pie()
+        .add(
+            series_name='Forbrug i perioder',
+            data_pair=data,
+            #rosetype="area",
+            radius=["40%", "70%"],
+            #center=["85%", "50%"],
+            label_opts=opts.LabelOpts(position="outside",
+            formatter="{a|{a}}{abg|}\n{hr|}\n {b|{b}: }{c} kWh\n {per|{d}%}  ",
+            background_color="#eee",
+            border_color="#aaa",
+            border_width=1,
+            border_radius=4,
+            rich={
+                "a": {"color": "#999", "lineHeight": 22, "align": "center"},
+                "abg": {
+                    "backgroundColor": "#e3e3e3",
+                    "width": "100%",
+                    "align": "right",
+                    "height": 22,
+                    "borderRadius": [4, 4, 0, 0],
+                },
+                "hr": {
+                    "borderColor": "#aaa",
+                    "width": "100%",
+                    "borderWidth": 0.5,
+                    "height": 0,
+                },
+                "b": {"fontSize": 12, "lineHeight": 33},
+                "per": {
+                    "color": "#eee",
+                    "backgroundColor": "#334455",
+                    "padding": [2, 4],
+                    "borderRadius": 2,
+                },
+            },),
+            #itemstyle_opts=opts.ItemStyleOpts(color=JsCode(color_function)    )
         )
+        .set_global_opts(
+            legend_opts=opts.LegendOpts(orient='vertical', pos_left="right", type_='scroll', is_show=True),
+            title_opts=opts.TitleOpts(
+                title='Forbrug i perioder', pos_left="center"
+            ),
+            toolbox_opts=opts.ToolboxOpts(orient='vertical', is_show=False),
+        )
+    )
     # else:
     #     data2 = st.session_state['df_over_standby']
     #     p = (
