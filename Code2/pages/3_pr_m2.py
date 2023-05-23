@@ -189,13 +189,17 @@ df['day-moment'] = df.apply(lambda row: get_day_moment(hour = row['from'].hour),
 df_g = standby_df(df)
 df_g['standby besparelse'] = df_g['Standby forbrug']-((df_g['Standby forbrug']/df_g['Standby Total [%]'])*30)
 df_g['standby besparelse'] = df_g['standby besparelse'].clip(lower=0)
-c.write(df_g)
-df_bespp = df_besp.merge(df_g[['Adresse', 'standby besparelse']], on='Adresse')
-df_bespp['standby nøgle'] = df_bespp['standby besparelse']/df_bespp['areal']
-df_bespp['samlet'] = (df_bespp['besparelse'] / df_bespp['areal'])* df_bespp['nøgletal'] + (df_bespp['standby besparelse'] / df_bespp['areal']) * df_bespp['nøgletal']
-df_bespp['samlet'] = pd.to_numeric(df_bespp['samlet'])
-df_bespp['samlet score'] = df_bespp['samlet'] / df_bespp['samlet'].max()
-df_bespp = df_bespp.replace([np.inf, -np.inf], 0)    
+#c.write(df_g)
+@st.cache_resource
+def score():
+    df_bespp = df_besp.merge(df_g[['Adresse', 'standby besparelse']], on='Adresse')
+    df_bespp['standby nøgle'] = df_bespp['standby besparelse']/df_bespp['areal']
+    df_bespp['samlet'] = (df_bespp['besparelse'] / df_bespp['areal'])* df_bespp['nøgletal'] + (df_bespp['standby besparelse'] / df_bespp['areal']) * df_bespp['nøgletal']
+    df_bespp['samlet'] = pd.to_numeric(df_bespp['samlet'])
+    df_bespp['samlet score'] = df_bespp['samlet'] / df_bespp['samlet'].max()
+    df_bespp = df_bespp.replace([np.inf, -np.inf], 0)    
+    return df_bespp
+df_bespp = score()
 c.write(df_bespp[['Adresse', 'årligt forbrug', 'areal', 'nøgletal', 'besparelse', 'drift nøgle', 'anvendelseskode', 'standby besparelse', 'standby nøgle', 'samlet', 'samlet score']].dropna().sort_values('samlet', ascending=False).style.background_gradient(cmap='Blues').set_precision(1))
 
 
