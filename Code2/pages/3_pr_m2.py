@@ -110,6 +110,8 @@ col1.subheader('Benchmark på tværs')
 col1.markdown("""Det bedste overblik over bygningerne fås ved at sammenligne deres forbrug.
 Ud fra dette kan det ses hvilke bygninger der er *mest energiintensive* og derfor hvilke bygninger der potentielt er noget at komme efter.""")
 tekst = st.text_input('Skriv tekst')
+st.write(tekst)
+df_besp['anvendelseskode'].astype(str)
 df_besp[df_besp['anvendelseskode'].str.contains(tekst)]
 df_besp['nøgletal'] = df_besp['årligt forbrug'] / df_besp['areal']
 col1.write(df_besp[['Adresse', 'årligt forbrug', 'areal', 'nøgletal', 'anvendelseskode']].sort_values('nøgletal', ascending=False))
