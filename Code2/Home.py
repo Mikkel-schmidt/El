@@ -78,7 +78,7 @@ if check_password():
         # numerical_cols = df.select_dtypes(include=[np.number]).columns
         # st.session_state['df_select'] = df.groupby(['Adresse', 'meter2'])[numerical_cols].sum().reset_index(drop=True)
 
-        st.session_state['df_select'] = df.groupby(['Adresse', 'meter']).sum().reset_index()[['Adresse', 'meter']].drop_duplicates('meter')
+        st.session_state['df_select'] = df[['meter', 'Adresse', 'amount', 'bkps']].groupby(['Adresse', 'meter']).sum().reset_index()[['Adresse', 'meter']].drop_duplicates('meter')
 
     nodes = select_tree()
 
