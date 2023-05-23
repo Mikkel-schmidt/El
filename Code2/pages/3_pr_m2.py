@@ -302,7 +302,7 @@ col1.write(df_g.sort_values(by='Standby Total [%]', ascending=False).round(1).st
 
 
 with col2:
-    figur = piee(df)
+    figur = piee(df[df.select_dtypes(exclude=[np.datetime64]).columns])
     st_pyecharts(figur, height='400px')
 
 with col2:
