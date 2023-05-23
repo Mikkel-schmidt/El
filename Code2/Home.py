@@ -74,10 +74,6 @@ if check_password():
     st.write(df)
 
     if 'df_select' not in st.session_state:
-        # df = df.rename(columns={'meter': 'meter2'})
-        # numerical_cols = df.select_dtypes(include=[np.number]).columns
-        # st.session_state['df_select'] = df.groupby(['Adresse', 'meter2'])[numerical_cols].sum().reset_index(drop=True)
-
         st.session_state['df_select'] = df[['meter', 'Adresse', 'amount', 'bkps']].groupby(['Adresse', 'meter']).sum().reset_index()[['Adresse', 'meter']].drop_duplicates('meter')
 
     nodes = select_tree()
@@ -131,10 +127,11 @@ if check_password():
     st.markdown('---')
     col1 , col2= st.columns([1,1])
     col1.header('Top driftsforbedringer')
-    col1.dataframe(df_besp[['Adresse', 'årligt forbrug',  '%']].head(10).style.background_gradient(cmap='Reds').set_precision(1), use_container_width=True )
+    col1.dataframe(df_besp[['Adresse', 'årligt forbrug', '%']].round(1).head(10).style.background_gradient(cmap='Reds'), use_container_width=True)
     if 'df_g' in st.session_state:
         col2.header('Top standby forbedringer')
-        col2.dataframe(st.session_state['df_g'].head(10).style.background_gradient(cmap='Blues').set_precision(1),use_container_width=True)
+        col2.dataframe(st.session_state['df_g'].round(1).head(10).style.background_gradient(cmap='Blues'), use_container_width=True)
+
 
 
 
