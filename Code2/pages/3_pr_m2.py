@@ -146,8 +146,7 @@ def barr(df, grader):
  
 with col2:
     figur = barr(df_besp, 30)
-    
-st_pyecharts(figur, height='500px')#, width='400px')
+    st_pyecharts(figur, height='500px')#, width='400px')
 
 st.markdown('---')
 
