@@ -62,7 +62,7 @@ df_besp = df_besp.sort_values(by='%', ascending=False)
 
 col1, col2 = st.columns([3,2])
 with col1:
-    st.dataframe(df_besp[['Adresse', 'besparelse', 'årligt forbrug', 'mean', '%']].round(1).style.background_gradient(cmap='Reds'), use_container_width=True)
+    st.dataframe(df_besp[['Adresse', 'besparelse', 'årligt forbrug', 'mean', '%']].round(1).style.background_gradient(cmap='Reds')mgh)
 
 with col2:
     adr = st.selectbox('Select', df_besp['Adresse'].unique())
@@ -200,7 +200,7 @@ def score():
     df_bespp = df_bespp.replace([np.inf, -np.inf], 0)    
     return df_bespp
 df_bespp = score()
-c.write(df_bespp[['Adresse', 'årligt forbrug', 'areal', 'nøgletal', 'besparelse', 'drift nøgle', 'anvendelseskode', 'standby besparelse', 'standby nøgle', 'samlet', 'samlet score']].dropna().sort_values('samlet', ascending=False).round(1).style.background_gradient(cmap='Reds'), use_container_width=True)
+c.write(df_bespp[['Adresse', 'årligt forbrug', 'areal', 'nøgletal', 'besparelse', 'drift nøgle', 'anvendelseskode', 'standby besparelse', 'standby nøgle', 'samlet', 'samlet score']].dropna().sort_values('samlet', ascending=False).round(1).style.background_gradient(cmap='Reds'))
 
 
 
