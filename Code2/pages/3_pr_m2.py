@@ -109,6 +109,7 @@ col1, col2 = st.columns([1,2])
 col1.subheader('Benchmark på tværs')
 col1.markdown("""Det bedste overblik over bygningerne fås ved at sammenligne deres forbrug.
 Ud fra dette kan det ses hvilke bygninger der er *mest energiintensive* og derfor hvilke bygninger der potentielt er noget at komme efter.""")
+col1.write(df_besp.columns)
 tekst = col1.text_input('Skriv tekst')
 #st.write(tekst)
 df_besp['anvendelseskode'].astype(str)
