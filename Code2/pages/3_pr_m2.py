@@ -121,7 +121,7 @@ Ud fra dette kan det ses hvilke bygninger der er *mest energiintensive* og derfo
 #df_besp['anvendelseskode'].astype(str)
 
 df_besp['nøgletal'] = df_besp['årligt forbrug'] / df_besp['areal']
-col1.write(df_besp[['Adresse', 'årligt forbrug', 'areal', 'nøgletal', 'anvendelseskode']].dropna('nøgletal').sort_values('nøgletal', ascending=False))
+col1.write(df_besp[['Adresse', 'årligt forbrug', 'areal', 'nøgletal', 'anvendelseskode']].dropna().sort_values('nøgletal', ascending=False))
 
 @st.cache_resource
 def barr(df, grader):
