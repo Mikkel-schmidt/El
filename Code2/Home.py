@@ -71,7 +71,7 @@ if check_password():
     df['meter'] = pd.to_numeric(df['meter'])
     df['from'] = pd.to_datetime(df['from'], utc=True) 
     #df = df.groupby('Adresse').mean().reset_index()
-    
+    st.write(df)
 
     if 'df_select' not in st.session_state:
         # df = df.rename(columns={'meter': 'meter2'})
