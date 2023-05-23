@@ -69,7 +69,7 @@ if check_password():
     df = meters_overblik()
 
     df['meter'] = pd.to_numeric(df['meter'])
-    df['from'] = pd.to_datetime(df['from'], utc=True)
+    df['from'] = pd.to_datetime(df['from'], utc=True) 
     #df = df.groupby('Adresse').mean().reset_index()
     
 
