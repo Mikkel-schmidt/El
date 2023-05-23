@@ -26,6 +26,7 @@ import locale
 
 locale.setlocale(locale.LC_ALL, "da_DK")
 pd.set_option('display.precision', 1)
+pd.options.display.float_format = "{:,.1f}".format
 
 
 st.set_page_config(layout="wide", page_title="Overblik forbrug", page_icon="https://media.licdn.com/dms/image/C4E0BAQEwX9tzA6x8dw/company-logo_200_200/0/1642666749832?e=2147483647&v=beta&t=UiNzcE1RvJD3kHI218Al7omOzPLhHXXeE_svU4DIwEM")
