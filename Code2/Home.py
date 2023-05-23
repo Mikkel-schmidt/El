@@ -75,7 +75,7 @@ if check_password():
 
     if 'df_select' not in st.session_state:
         numerical_cols = df.select_dtypes(include=[np.number]).columns
-        df_select = df.groupby(['Adresse', 'meter'])[numerical_cols].sum().reset_index()
+        df_select = df.groupby(['Adresse', 'meter'])[numerical_cols].sum().reset_index().rename(columns={'meter': 'meter2'})
         #st.session_state['df_select'] = df.groupby(['Adresse', 'meter']).sum().reset_index()[['Adresse', 'meter']].drop_duplicates('meter')
 
     nodes = select_tree()
