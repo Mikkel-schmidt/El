@@ -201,7 +201,7 @@ def score():
     df_bespp = df_bespp.replace([np.inf, -np.inf], 0)    
     return df_bespp
 df_bespp = score()
-c.write(df_bespp[['Adresse', 'årligt forbrug', 'areal', 'nøgletal', 'besparelse', 'drift nøgle', 'anvendelseskode', 'standby besparelse', 'standby nøgle', 'samlet', 'samlet score']].dropna().sort_values('samlet', ascending=False).style.background_gradient(cmap='Blues').set_precision(1))
+c.write(df_bespp[['Adresse', 'årligt forbrug', 'areal', 'nøgletal', 'besparelse', 'drift nøgle', 'anvendelseskode', 'standby besparelse', 'standby nøgle', 'samlet', 'samlet score']].dropna().sort_values('samlet', ascending=False).round(1).style.background_gradient(cmap='Reds'), use_container_width=True)
 
 
 
@@ -298,7 +298,7 @@ col1.markdown("""I tabellen nedenunder kan du se informationer på de enkelte by
 if 'df_g' not in st.session_state:
         st.session_state['df_g'] = df_g.sort_values(by='Standby Total [%]', ascending=False) 
 
-col1.write(df_g.sort_values(by='Standby Total [%]', ascending=False).style.background_gradient(cmap='Blues').set_precision(1))
+col1.write(df_g.sort_values(by='Standby Total [%]', ascending=False).round(1).style.background_gradient(cmap='Reds'), use_container_width=True)
 
 
 with col2:
