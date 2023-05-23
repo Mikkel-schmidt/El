@@ -109,8 +109,8 @@ col1, col2 = st.columns([1,2])
 col1.subheader('Benchmark på tværs')
 col1.markdown("""Det bedste overblik over bygningerne fås ved at sammenligne deres forbrug.
 Ud fra dette kan det ses hvilke bygninger der er *mest energiintensive* og derfor hvilke bygninger der potentielt er noget at komme efter.""")
-df_besp["anvendelseskode"] = df_besp["anvendelseskode"].apply(eval)
-for i, l in enumerate(fruits["favorite_fruits"]):
+#df_besp["anvendelseskode"] = df_besp["anvendelseskode"].apply(eval)
+for i, l in enumerate(df_besp["anvendelseskode"]):
     st.write("list",i,"is",type(l))
 df_besp['nøgletal'] = df_besp['årligt forbrug'] / df_besp['areal']
 col1.write(df_besp[['Adresse', 'årligt forbrug', 'areal', 'nøgletal', 'anvendelseskode']].sort_values('nøgletal', ascending=False))
