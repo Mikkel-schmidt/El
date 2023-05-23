@@ -112,7 +112,7 @@ Ud fra dette kan det ses hvilke bygninger der er *mest energiintensive* og derfo
 tekst = st.text_input('Skriv tekst')
 st.write(tekst)
 df_besp['anvendelseskode'].astype(str)
-df_besp[df_besp['anvendelseskode'].str.contains(tekst)]
+df_besp[df_besp['anvendelseskode'].str.contains(tekst, na=False)]
 df_besp['nøgletal'] = df_besp['årligt forbrug'] / df_besp['areal']
 col1.write(df_besp[['Adresse', 'årligt forbrug', 'areal', 'nøgletal', 'anvendelseskode']].sort_values('nøgletal', ascending=False))
 
