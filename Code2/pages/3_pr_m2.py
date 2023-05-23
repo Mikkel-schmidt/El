@@ -49,6 +49,12 @@ def meters_overblik():
 df, df_besp = meters_overblik()
 df['from'] = pd.to_datetime(df['from'], utc=True)
 df['meter'] = pd.to_numeric(df['meter'])
+
+tekst = st.text_input('Skriv tekst')
+#st.write(tekst)
+df_besp['anvendelseskode'].astype(str)
+df_besp = df_besp[df_besp['anvendelseskode'].str.contains(tekst, na=False)]
+
 df_besp = df_besp.sort_values(by='%', ascending=False)
 #st.write(df.head())
 #st.write(df_besp)
