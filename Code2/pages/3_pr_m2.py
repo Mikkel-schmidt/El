@@ -62,7 +62,7 @@ df_besp = df_besp.sort_values(by='%', ascending=False)
 
 col1, col2 = st.columns([3,2])
 with col1:
-    st.dataframe(df_besp[['Adresse', 'besparelse', 'årligt forbrug', 'mean', '%']].round(1).style.background_gradient(cmap='Reds')mgh)
+    st.dataframe(df_besp[['Adresse', 'besparelse', 'årligt forbrug', 'mean', '%']].round(1).style.background_gradient(cmap='Reds'))
 
 with col2:
     adr = st.selectbox('Select', df_besp['Adresse'].unique())
