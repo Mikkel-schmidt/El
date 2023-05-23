@@ -200,7 +200,7 @@ def score():
     df_bespp = df_bespp.replace([np.inf, -np.inf], 0)    
     return df_bespp
 df_bespp = score()
-c.write(df_bespp[['Adresse', 'årligt forbrug', 'areal', 'nøgletal', 'besparelse', 'drift nøgle', 'anvendelseskode', 'standby besparelse', 'standby nøgle', 'samlet', 'samlet score']].dropna().sort_values('samlet', ascending=False).round(1).style.background_gradient(cmap='Reds'), use_container_width=True)
+c.write(df_bespp[['Adresse', 'årligt forbrug', 'areal', 'nøgletal', 'besparelse', 'drift nøgle', 'anvendelseskode', 'standby besparelse', 'standby nøgle', 'samlet', 'samlet score']].dropna().sort_values('samlet score', ascending=False).round(1).style.background_gradient(cmap='Reds'), use_container_width=True)
 
 
 
