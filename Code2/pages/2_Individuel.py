@@ -190,7 +190,7 @@ st.write('Årlig forbrug på ' + str(ugg['amount_mean_now'].sum()*52) + ' kWh')
 st.write('Mulig besparelse på ' + str((ugg['besparelse_kwh'].sum()*52)/(ugg['amount_mean_now'].sum()*52)*100) + '%')
 
 
-
+ 
 @st.cache_resource
 def liness(df, df2):
     b1 = (
