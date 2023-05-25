@@ -252,7 +252,7 @@ df_g = standby_df(df)
 if 'df_g' not in st.session_state:
         st.session_state['df_g'] = df_g.sort_values(by='Standby Total [%]', ascending=False) 
 
-col1.write(df_g.sort_values(by='Standby Total [%]', ascending=False).style.background_gradient(cmap='Blues').set_precision(1))
+col1.write(df_g.sort_values(by='Standby Total [%]', ascending=False).round(1).style.background_gradient(cmap='Blues'))
 
 
 with col2:
