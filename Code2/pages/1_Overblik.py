@@ -148,7 +148,7 @@ df['day-moment'] = df.apply(lambda row: get_day_moment(hour = row['from'].hour),
 
 @st.cache_resource
 def piee(df):
-    hej = df.groupby('day-moment').sum()['amount'].reset_index()
+    hej = df[['day-moment', 'amount']].groupby('day-moment').sum()['amount'].reset_index()
     
     data = [list(z) for z in zip(hej['day-moment'], hej['amount'])]
     st.session_state['df_over_standby'] = data
